@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>粤讲粤掂 · 粤语学习站</title>
+<style>
+:root{
+  --bg:#faf7f2; --card:#ffffff; --ink:#1e2430; --sub:#5b6472;
+  --accent:#7c3aed; --accent2:#db2777; --cyan:#0891b2; --ok:#059669; --warn:#d97706;
+  --line:#e9e4da; --shadow:0 6px 24px rgba(30,36,48,.07);
+  --grad:linear-gradient(120deg,#7c3aed,#db2777);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"PingFang SC","PingFang HK","Noto Sans SC","Noto Sans HK","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+header{position:sticky;top:0;z-index:50;background:rgba(20,16,34,.92);backdrop-filter:blur(12px);color:#fff}
+.nav{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:4px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.logo{display:flex;align-items:center;gap:8px;padding:12px 14px 12px 0;white-space:nowrap;font-weight:800;font-size:17px}
+.logo .dot{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;place-items:center;font-size:15px}
+.logo small{font-weight:500;opacity:.55;font-size:11px;margin-left:2px}
+.tab{border:0;background:transparent;color:#ffffffb0;padding:14px 11px;font-size:14px;cursor:pointer;white-space:nowrap;border-bottom:2.5px solid transparent;font-family:inherit}
+.tab:hover{color:#fff}
+.tab.on{color:#fff;border-bottom-color:#f472b6;font-weight:600}
+main{max-width:1120px;margin:0 auto;padding:26px 16px 90px}
+.page{display:none;animation:fade .25s}
+.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+h1{font-size:30px;letter-spacing:.5px}
+h2{font-size:21px;margin:34px 0 14px;display:flex;align-items:center;gap:8px}
+h2:first-child{margin-top:0}
+h2 .n{width:26px;height:26px;border-radius:8px;background:var(--grad);color:#fff;font-size:13px;display:grid;place-items:center;flex:none}
+h3{font-size:16px;margin:18px 0 8px}
+h3:first-child{margin-top:0}
+p.lead{color:var(--sub);margin:8px 0 18px;max-width:760px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.g4{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.btn{border:0;border-radius:10px;padding:9px 16px;font-size:14px;cursor:pointer;font-family:inherit;font-weight:600;transition:.15s}
+.btn:active{transform:scale(.97)}
+.btn-p{background:var(--grad);color:#fff}
+.btn-p:hover{filter:brightness(1.08)}
+.btn-o{background:#fff;color:var(--accent);border:1.5px solid #ddd2f7}
+.btn-o:hover{background:#f6f1ff}
+.btn-s{background:#f1ede6;color:var(--ink)}
+.btn-s:hover{background:#e8e2d6}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;font-size:13px;cursor:pointer;font-family:inherit;color:var(--sub)}
+.chip.on{background:var(--grad);color:#fff;border-color:transparent;font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sp{flex:1}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;vertical-align:middle}
+.t-hot{background:#fde8e8;color:#be123c}.t-mid{background:#fef3c7;color:#b45309}.t-ok{background:#dcfce7;color:#047857}.t-info{background:#e0e7ff;color:#4338ca}
+.jp{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--accent2);font-size:.92em;font-weight:600}
+.hero{background:linear-gradient(135deg,#2b1055 0%,#5b1670 45%,#9d2f6a 100%);border-radius:22px;color:#fff;padding:44px 34px;position:relative;overflow:hidden}
+.hero:before{content:"聲";position:absolute;right:36px;top:-30px;font-size:220px;opacity:.08;font-family:"Songti SC","Noto Serif SC",serif}
+.hero:after{content:"調";position:absolute;right:-20px;bottom:-70px;font-size:200px;opacity:.06;font-family:"Songti SC","Noto Serif SC",serif}
+.hero h1{font-size:34px;margin-bottom:6px}
+.hero .sub{opacity:.85;max-width:640px}
+.hero .stats{display:flex;gap:26px;margin-top:26px;flex-wrap:wrap}
+.hero .st b{display:block;font-size:24px;background:linear-gradient(90deg,#fbbf24,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .st span{font-size:12.5px;opacity:.75}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border-radius:12px;overflow:hidden}
+.tbl th{background:#f4f0e8;text-align:left;padding:9px 10px;font-size:13px}
+.tbl td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top}
+.tbl tr:hover td{background:#fbf9f4}
+.ph{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--grad);color:#fff;border:0;cursor:pointer;font-size:13px;flex:none}
+.ph:hover{filter:brightness(1.1)}
+.initial-card{padding:14px;cursor:pointer;transition:.15s;position:relative}
+.initial-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.initial-card .big{font-size:24px;font-weight:800;font-family:"SF Mono",Menlo,monospace;color:var(--accent)}
+.initial-card .ex{margin-top:4px;font-size:14px}
+.initial-card .diff{position:absolute;top:10px;right:10px}
+#finalsTable{overflow-x:auto}
+#finalsTable table{min-width:760px}
+#finalsTable td,#finalsTable th{text-align:center;font-size:13px;padding:7px 6px}
+#finalsTable td.hd{font-weight:800;color:var(--accent);background:#f8f5ff}
+#finalsTable td.has{cursor:pointer}
+#finalsTable td.has:hover{background:#fdf0f7}
+.toneRow{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.toneCard{padding:16px;text-align:center;cursor:pointer;transition:.15s}
+.toneCard:hover{transform:translateY(-2px)}
+.toneCard .no{font-size:13px;font-weight:800}
+.toneCard .ch{font-size:34px;margin:6px 0}
+.toneCard .cv{font-size:12px;color:var(--sub)}
+.quizQ{font-size:20px;font-weight:700;text-align:center;margin:18px 0}
+.quizQ .qjp{color:var(--accent2)}
+.opt{display:block;width:100%;text-align:center;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-size:16px;cursor:pointer;font-family:inherit;margin-bottom:8px;transition:.12s}
+.opt:hover{border-color:var(--accent);background:#faf6ff}
+.opt.right{background:#e7f8ef;border-color:var(--ok);color:#047857;font-weight:700}
+.opt.wrong{background:#fdecec;border-color:#dc2626;color:#b91c1c}
+.vocab-card{padding:14px;transition:.15s;cursor:pointer}
+.vocab-card:hover{transform:translateY(-2px)}
+.vocab-card .w{font-size:20px;font-weight:700}
+.vocab-card .m{color:var(--sub);font-size:13.5px;margin-top:2px}
+.vocab-card .s{font-size:12.5px;color:var(--sub);border-top:1px dashed var(--line);margin-top:8px;padding-top:8px}
+.flip .w,.flip .m{filter:blur(7px)}
+.weekTabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.dayCard{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:10px}
+.dayCard input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent);cursor:pointer;flex:none}
+.dayCard .dt{font-weight:700;font-size:15px}
+.dayCard .dd{color:var(--sub);font-size:13.5px;margin-top:2px}
+.dayCard.done{opacity:.55}
+.dayCard.done .dt{text-decoration:line-through}
+.progbar{height:8px;border-radius:99px;background:#eee7db;overflow:hidden}
+.progbar i{display:block;height:100%;background:var(--grad);transition:.3s}
+.bubble{max-width:82%;padding:12px 16px;border-radius:16px;margin-bottom:10px;position:relative;cursor:pointer}
+.bubble:hover{filter:brightness(.98)}
+.bubble .bjp{font-size:11.5px;opacity:.75;display:block;font-family:"SF Mono",Menlo,monospace}
+.bubble .bm{font-size:12px;opacity:.7;display:block;margin-top:4px;border-top:1px dashed rgba(0,0,0,.12);padding-top:4px}
+.b-L{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.b-R{background:linear-gradient(120deg,#efe7ff,#fde7f2);border:1px solid #ecd9ff;border-bottom-right-radius:4px;margin-left:auto}
+.bubble .who{font-size:11px;font-weight:700;color:var(--sub);margin-bottom:3px}
+.promptCard{position:relative}
+.promptCard pre{background:#f7f4ee;border-radius:10px;padding:14px;font-size:13px;white-space:pre-wrap;font-family:inherit;border:1px solid var(--line);max-height:300px;overflow:auto;margin-top:10px}
+.copyBtn{position:absolute;top:14px;right:14px}
+.logbox textarea{width:100%;min-height:170px;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-family:inherit;font-size:13.5px;resize:vertical;background:#fffdf8}
+.logbox textarea:focus{outline:2px solid #ddd2f7}
+.recSlot{padding:18px;text-align:center}
+.recBtn{width:62px;height:62px;border-radius:50%;border:0;background:var(--grad);color:#fff;font-size:22px;cursor:pointer;margin:0 auto 10px;transition:.15s;box-shadow:0 4px 16px rgba(219,39,119,.35)}
+.recBtn.rec{background:#dc2626;animation:pulse 1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(220,38,38,.15)}}
+audio{width:100%;margin-top:8px}
+.radar{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center}
+.evalRow{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+.evalRow input[type=range]{width:100%;accent-color:var(--accent)}
+.evalRow .val{font-weight:800;color:var(--accent);width:26px;text-align:center}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1e2430;color:#fff;padding:11px 22px;border-radius:12px;font-size:14px;opacity:0;transition:.3s;z-index:99;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.note{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px 14px;font-size:13.5px;color:#92400e}
+.note.blue{background:#eff6ff;border-color:#bfdbfe;color:#1e40af}
+.tip{font-size:12.5px;color:var(--sub)}
+footer{max-width:1120px;margin:0 auto;padding:26px 16px;color:var(--sub);font-size:12.5px;border-top:1px solid var(--line);text-align:center}
+@media(max-width:640px){h1{font-size:24px}.hero{padding:30px 20px}.hero h1{font-size:26px}}
+</style>
+</head>
+<body>
+<header><nav class="nav">
+  <div class="logo"><span class="dot">粤</span>粤讲粤掂<small>Cantonese Learning Hub</small></div>
+  <button class="tab on" data-p="home">概览</button>
+  <button class="tab" data-p="sound">发音系统</button>
+  <button class="tab" data-p="plan">三周计划</button>
+  <button class="tab" data-p="vocab">词汇库</button>
+  <button class="tab" data-p="conv">情景对话</button>
+  <button class="tab" data-p="prompt">AI提示词</button>
+  <button class="tab" data-p="log">学习日志</button>
+  <button class="tab" data-p="progress">进度·录音</button>
+</nav></header>
+
+<main>
+
+<!-- ================= 概览 ================= -->
+<section class="page on" id="p-home">
+  <div class="hero">
+    <h1>粤讲粤掂 <span style="font-size:18px;opacity:.8">jyut6 gong2 jyut6 dim6</span></h1>
+    <div class="sub">为普通话母语的计算机系学生定制的三星期粤语入门站：粤拼发音 → 高频词汇 → 情景对话 → 专业场景。学习数据与录音证据自动留档，直接服务 LEI1101 课程报告。</div>
+    <div class="stats">
+      <div class="st"><b>19</b><span>声母</span></div>
+      <div class="st"><b>9×9</b><span>韵腹×韵尾</span></div>
+      <div class="st"><b>6 调</b><span>九声六调</span></div>
+      <div class="st"><b id="statVocab">0</b><span>分类词汇</span></div>
+      <div class="st"><b>5</b><span>情景对话</span></div>
+    </div>
+  </div>
+
+  <h2><span class="n">1</span>为什么这样学（对齐课程评估）</h2>
+  <div class="grid g2">
+    <div class="card"><h3>🎯 闭环设计：用粤语汇报「我怎么学粤语」</h3>
+      <p class="tip">第 3 周的练习内容 = 小组报告的五项核心内容（目标设定 → 弱项诊断 → AI 工具 → 学习方案 → 成果展示）。学到的东西直接变成报告素材，一份努力两份收获。</p></div>
+    <div class="card"><h3>📊 进步证据链（A+ 的关键）</h3>
+      <p class="tip">Week1 基线录音 → Week2 情景对话录音 → Week3 三分钟汇报录音，三版对比 + AI 五维评估记录。「进度·录音」页一站式生成证据。</p></div>
+    <div class="card"><h3>🤖 人机协作留痕</h3>
+      <p class="tip">「AI提示词」页内置诊断 / 计划 / 陪练 / 评估等提示词（含迭代示例），配合课程的《提示詞迭代記錄表》使用，反思报告不再缺素材。</p></div>
+    <div class="card"><h3>⏱ 每周 2 小时，可执行</h3>
+      <p class="tip">每天 20 分钟 × 7 天。任务打卡、周测、词汇自测全部内置，进度自动保存在本机浏览器。</p></div>
+  </div>
+
+  <h2><span class="n">2</span>快速开始</h2>
+  <div class="card">
+    <div class="row" style="gap:10px">
+      <button class="btn btn-p" onclick="go('sound')">① 先学粤拼发音</button>
+      <button class="btn btn-o" onclick="go('plan')">② 跟着三周计划打卡</button>
+      <button class="btn btn-o" onclick="go('vocab')">③ 词汇库自测</button>
+      <button class="btn btn-s" onclick="go('progress')">④ 录音留证据</button>
+    </div>
+    <div class="note blue" style="margin-top:14px">🔊 <b>发音功能</b>：本站用系统粤语语音朗读，推荐 Chrome / Edge / macOS Safari。点击任意带 🔊 的卡片即可听。<span id="ttsStatus"></span></div>
+  </div>
+
+  <h2><span class="n">3</span>粤语 vs 普通话：一分钟看懂差异</h2>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>维度</th><th>普通话</th><th>粤语</th><th>你的难点</th></tr>
+      <tr><td>声调</td><td>4 调 + 轻声</td><td><b>6 调</b>（九声，含入声）</td><td>低降 21 / 低升 13 / 低平 22 普通话没有</td></tr>
+      <tr><td>入声</td><td>已消失</td><td>-p / -t / -k 急促收尾</td><td>⚠️ 头号难关：十 sap6、一 jat1、六 luk6</td></tr>
+      <tr><td>声母</td><td>zh/ch/sh、j/q/x</td><td>无翘舌；有 ng-、gw-、kw-</td><td>ng- 声母（我 ngo5）</td></tr>
+      <tr><td>元音</td><td>a 一种</td><td>aa 长 / a 短 对立</td><td>三 saam1 ≠ 心 sam1</td></tr>
+      <tr><td>语序</td><td>你先走</td><td>你行先（修饰语后置）</td><td>畀杯水我 = 给我一杯水</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 发音系统 ================= -->
+<section class="page" id="p-sound">
+  <h1>粤拼发音系统</h1>
+  <p class="lead">粤拼（Jyutping）= 声母 + 韵母 + 声调数字，例如 你 = nei5。以下所有卡片点击可朗读（系统粤语语音）。🟢基本相同 🟡注意细节 🔴普通话没有。</p>
+
+  <h2><span class="n">1</span>声母 · 19 个</h2>
+  <div class="grid g4" id="initialsGrid"></div>
+  <div class="note" style="margin-top:12px">📌 粤语<b>没有</b> zh/ch/sh/r 和 j/q/x；ng- 是否根鼻音（先哼「嗯——」保持喉部震动再张嘴）；z/c/s 一律平舌。n/l 要分清：你 nei5 ≠ 李 lei5（防「懒音」）。</div>
+
+  <h2><span class="n">2</span>韵母 · 9 韵腹 × 9 韵尾</h2>
+  <div class="card" id="finalsTable"></div>
+  <div class="note" style="margin-top:12px">📌 <b>最大坑：aa / a 长短对立</b> —— aa 嘴大音长（三 saam1），a 嘴小音短（心 sam1）。点表格任一格听例字；🔴 系列（oe / eo / yu）是普通话没有的圆唇元音。</div>
+
+  <h2><span class="n">3</span>声调 · 九声六调</h2>
+  <div class="card" style="margin-bottom:14px">
+    <svg viewBox="0 0 640 150" style="width:100%;max-width:680px;display:block;margin:0 auto">
+      <g stroke="#eee7db" stroke-width="1">
+        <line x1="30" y1="20" x2="620" y2="20"/><line x1="30" y1="50" x2="620" y2="50"/><line x1="30" y1="80" x2="620" y2="80"/><line x1="30" y1="110" x2="620" y2="110"/>
+      </g>
+      <g font-size="10" fill="#a09a8d">
+        <text x="6" y="24">5</text><text x="6" y="54">4</text><text x="6" y="84">3</text><text x="6" y="114">2</text><text x="6" y="144">1</text>
+      </g>
+      <g stroke-width="4" stroke-linecap="round">
+        <line x1="40" y1="20" x2="100" y2="20" stroke="#7c3aed"/><text x="105" y="24" font-size="13" fill="#7c3aed" font-weight="700">1 阴平 55 诗</text>
+        <line x1="200" y1="50" x2="260" y2="20" stroke="#a855f7"/><text x="265" y="24" font-size="13" fill="#a855f7" font-weight="700">2 阴上 35 史</text>
+        <line x1="370" y1="50" x2="430" y2="50" stroke="#db2777"/><text x="435" y="54" font-size="13" fill="#db2777" font-weight="700">3 阴去 33 试</text>
+        <line x1="40" y1="80" x2="100" y2="110" stroke="#e11d48"/><text x="105" y="108" font-size="13" fill="#e11d48" font-weight="700">4 阳平 21 时</text>
+        <line x1="200" y1="110" x2="260" y2="80" stroke="#f97316"/><text x="265" y="90" font-size="13" fill="#f97316" font-weight="700">5 阳上 13 市</text>
+        <line x1="370" y1="80" x2="430" y2="80" stroke="#0891b2"/><text x="435" y="84" font-size="13" fill="#0891b2" font-weight="700">6 阳去 22 是</text>
+      </g>
+      <text x="30" y="142" font-size="11" fill="#a09a8d">经典口诀（调值顺序 55→35→33→21→13→22→5→3→2）：</text>
+      <text x="330" y="142" font-size="13" fill="#1e2430" font-weight="700">三 九 四 零 五 二 七 八 六</text>
+    </svg>
+  </div>
+  <div class="toneRow" id="tonesGrid"></div>
+  <div class="note blue" style="margin-top:12px">🎧 跟读方法：诗 si1=普通话一声（高平）· 史 si2=二声（升）· 试 si3=中平（比一声低）· 时 si4=只降不升的「半三声」· 市 si5=低升（像疑问「啊？」）· 是 si6=低沉平念。入声 七 cat1 / 八 baat3 / 六 luk6 与 1/3/6 同高，只是<b>短促</b>。</div>
+
+  <h2><span class="n">4</span>入声专题（普通话者头号难关）</h2>
+  <div class="grid g3">
+    <div class="card"><h3>-p 闭唇收尾 <span class="tag t-hot">必练</span></h3><p class="tip">发 sa 的瞬间双唇突然合上（像被掐断）。</p><div style="margin-top:10px" id="tsapP"></div></div>
+    <div class="card"><h3>-t 舌尖抵齿</h3><p class="tip">发 ba 的瞬间舌尖弹到上齿背停住。</p><div style="margin-top:10px" id="tsapT"></div></div>
+    <div class="card"><h3>-k 喉部锁紧</h3><p class="tip">发 si 的瞬间喉咙像轻咳一样锁住，不吐气。</p><div style="margin-top:10px" id="tsapK"></div></div>
+  </div>
+  <div class="card" style="margin-top:12px"><h3>✅ 一句话过关测试</h3>
+    <p>「<b>一七八十都唔识</b>」（jat1 cat1 baat3 sap6 dou1 m4 sik1）—— 五个入声连发，全部短促收尾即过关。<button class="btn btn-p" style="padding:5px 14px;font-size:13px;margin-left:8px" onclick="speak('一七八十都唔識')">🔊 听示范</button></p></div>
+
+  <h2><span class="n">5</span>懒音自查（香港人常犯，你要反向利用）</h2>
+  <div class="card"><table class="tbl">
+    <tr><th>现象</th><th>错误读法</th><th>正确</th><th>自检句</th></tr>
+    <tr><td>ng 脱落</td><td>我 o5</td><td class="jp">我 ngo5</td><td>我唔去 ngo5 m4 heoi3</td></tr>
+    <tr><td>n → l</td><td>你 lei5</td><td class="jp">你 nei5</td><td>你丽离李 nei5 lai6 lei4 lei5</td></tr>
+    <tr><td>-ng → -n</td><td>猛 maan2</td><td class="jp">猛 maang2</td><td>生性 saang1 sing3</td></tr>
+    <tr><td>gw → g</td><td>广 gong2</td><td class="jp">广 gwong2</td><td>广东 gwong2 dung1</td></tr>
+  </table>
+  <p class="tip" style="margin-top:8px">你是普通话母语，天然不犯懒音——刻意把 ng、n/l、gw 念到位，就是你的比较优势。</p></div>
+
+  <h2><span class="n">6</span>发音小测（Week1 周测用）</h2>
+  <div class="card" id="quizBox">
+    <div class="row"><button class="btn btn-p" onclick="startQuiz(20)">开始 20 题测验</button><button class="btn btn-o" onclick="startQuiz(10)">快速 10 题</button><span class="tip" id="quizScore"></span></div>
+    <div id="quizArea" style="margin-top:10px"></div>
+  </div>
+</section>
+<!-- ================= 三周计划 ================= -->
+<section class="page" id="p-plan">
+  <h1>三星期学习计划</h1>
+  <p class="lead">每天 20 分钟 ≈ 每周 2 小时 20 分。勾选自动保存（本机浏览器）。带 ⭐ 的是周检查点——那是你的进步证据。详细原理与 AI 提示词见配套文档 <b>outputs/cantonese-3week-plan.md</b>。</p>
+  <div class="card" style="margin-bottom:16px">
+    <div class="row"><b>总进度</b><div class="progbar" style="flex:1"><i id="planBar" style="width:0%"></i></div><span id="planPct" class="jp" style="min-width:40px;text-align:right">0%</span></div>
+  </div>
+  <div class="weekTabs">
+    <button class="chip on" data-w="0">第 1 周 · 发音筑基</button>
+    <button class="chip" data-w="1">第 2 周 · 词汇与开口</button>
+    <button class="chip" data-w="2">第 3 周 · 专业与汇报</button>
+  </div>
+  <div id="weekBox"></div>
+  <div class="card" style="margin-top:16px"><h3>🏆 毕业标准（对应 A+ 成果展示）</h3>
+    <ul style="padding-left:20px;font-size:14px">
+      <li>声调错误率：基线录音 → Week3 汇报录音，下降至 &lt;20%；</li>
+      <li>词汇认读：150 词 ≥ 80%；</li>
+      <li>3 分钟粤语学习历程汇报脱稿完成（内容 = 报告五项核心内容）；</li>
+      <li>三版录音 + AI 评估记录齐备，可截图直接放简报。</li>
+    </ul></div>
+</section>
+
+<!-- ================= 词汇库 ================= -->
+<section class="page" id="p-vocab">
+  <h1>词汇库</h1>
+  <p class="lead">点击卡片朗读。开启「自测模式」后先看粤语词猜意思，点击翻转核对，再自评。常错词会记录在案。</p>
+  <div class="row" style="margin-bottom:14px" id="vocabChips"></div>
+  <div class="row" style="margin-bottom:16px">
+    <input id="vocabSearch" placeholder="🔍 搜粤语词 / 普通话意思…" oninput="renderVocab()" style="flex:1;min-width:200px;padding:9px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px">
+    <button class="chip" id="selfTestBtn" onclick="toggleSelfTest()">🎭 自测模式：关</button>
+  </div>
+  <div class="grid g3" id="vocabGrid"></div>
+  <p class="tip" id="vocabCount" style="margin-top:12px"></p>
+</section>
+
+<!-- ================= 情景对话 ================= -->
+<section class="page" id="p-conv">
+  <h1>情景对话</h1>
+  <p class="lead">点击气泡逐句朗读，或「连续播放」整段。遮住普通话释义先听懂，是 Week2 的核心练法。</p>
+  <div class="row" style="margin-bottom:14px" id="convChips"></div>
+  <div class="card">
+    <div class="row" style="margin-bottom:14px">
+      <b id="convTitle"></b><span class="sp"></span>
+      <button class="btn btn-o" onclick="playAll()">▶ 连续播放</button>
+    </div>
+    <div id="convBox" style="max-width:640px"></div>
+  </div>
+  <h2><span class="n">＋</span>核心语法速览（粤语 ≠ 普通话的 8 个点）</h2>
+  <div class="grid g2" id="grammarGrid"></div>
+</section>
+
+<!-- ================= AI 提示词 ================= -->
+<section class="page" id="p-prompt">
+  <h1>AI 提示词库</h1>
+  <p class="lead">按课程提示词框架「角—任—资—限—式—核」（角色/任务/资料/限制/格式/核查）设计。配合《提示詞迭代記錄表》记录 V1→V6 的修改原因与效果变化——这些记录直接引用进反思报告。</p>
+  <div class="grid g2" id="promptGrid"></div>
+  <h2><span class="n">＋</span>迭代示范：从 V1 到 V3（可直接抄进迭代记录表）</h2>
+  <div class="card">
+    <table class="tbl">
+      <tr><th style="width:52px">版本</th><th>提示词（重点改动加粗）</th><th>为什么这么改 & AI 回应变化</th></tr>
+      <tr><td><b>V1</b></td><td>教我粤语。</td><td>太笼统：AI 输出一份通用粤语简介，没有针对性，不可操作。</td></tr>
+      <tr><td><b>V2</b></td><td><b>你是粤语语音教练，我是普通话母语、粤语零基础的大学生。</b>请教我粤语发音。</td><td>加了角色+背景：AI 开始针对普通话者讲入声、aa/a 对立，但一次性输出太多，没有练习环节。</td></tr>
+      <tr><td><b>V3</b></td><td>你是粤语语音教练…<b>请通过「出题→我答→你纠正」的对话方式教我，先测我 5 道声调听辨题，每轮最多纠正 3 个错误，用鼓励的语气，附粤拼。</b></td><td>加了任务方式+限制+格式：AI 变成陪练，互动性和反馈质量显著提升，纠正具体可执行。</td></tr>
+    </table>
+    <p class="tip" style="margin-top:8px">V4–V6 思路：V4 加入「优先练入声」的针对性 → V5 要求「每次给 3 个最小对立对」→ V6 要求「模拟茶餐厅对话检验」。每次只改一处，方便归因。</p>
+  </div>
+</section>
+
+<!-- ================= 学习日志 ================= -->
+<section class="page" id="p-log">
+  <h1>学习日志（课程要求：Module 1–5 各一篇，共五篇）</h1>
+  <p class="lead">日志是反思报告的附录，占 5%。要写：用 AI 学了什么、怎么学的、AI 工具五维评估（准确性/鼓励性/可行性/实用性/个性化适配度）。点「填入模板」后<b>务必按真实经历修改</b>——真实的记录才有反思价值。内容自动保存。</p>
+  <div class="grid g2" id="logGrid"></div>
+  <div class="row" style="margin-top:16px">
+    <button class="btn btn-p" onclick="exportLogs()">⬇ 导出全部日志（Markdown）</button>
+    <span class="tip">导出后可直接附在个人书面报告后作为附录。</span>
+  </div>
+</section>
+
+<!-- ================= 进度 ================= -->
+<section class="page" id="p-progress">
+  <h1>进度 · 录音 · 评估</h1>
+  <p class="lead">这一页就是你的「进步证据中心」：录音三件套 + AI 工具五维评估。报告当天把这里的录音对比和雷达图截图放进简报。</p>
+
+  <h2><span class="n">1</span>总览</h2>
+  <div class="grid g4">
+    <div class="card recSlot"><b style="font-size:26px" id="ovPlan">0%</b><div class="tip">计划任务完成度</div></div>
+    <div class="card recSlot"><b style="font-size:26px" id="ovLog">0/5</b><div class="tip">学习日志篇数</div></div>
+    <div class="card recSlot"><b style="font-size:26px" id="ovRec">0/3</b><div class="tip">录音证据</div></div>
+    <div class="card recSlot"><b style="font-size:26px" id="ovQuiz">—</b><div class="tip">最近发音测验</div></div>
+  </div>
+
+  <h2><span class="n">2</span>录音证据（基线 → 对话 → 汇报）</h2>
+  <div class="grid g3" id="recGrid"></div>
+  <div class="card" style="margin-top:12px">
+    <h3>🎙 基线 10 句（Week1 · Day7 录制，Week3 复录同样内容）</h3>
+    <div class="note" id="baselineBox" style="margin-bottom:10px"></div>
+    <button class="btn btn-o" onclick="playBaseline()">▶ 连续播放 10 句（跟读示范）</button>
+    <p class="tip" style="margin-top:8px">对着文本朗读录进上面的录音槽，下载存档，命名 baseline-week1 / speaking-week2 / report-week3。</p>
+  </div>
+
+  <h2><span class="n">3</span>AI 工具五维评估记录</h2>
+  <div class="card">
+    <div class="row" style="margin-bottom:10px">
+      <input id="evalTool" placeholder="工具名，如 豆包语音 / DeepSeek / ChatGPT…" style="flex:1;min-width:220px;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit">
+      <button class="btn btn-p" onclick="addEval()">＋ 记录评估</button>
+    </div>
+    <div id="evalList"></div>
+    <div class="radar" style="margin-top:18px">
+      <svg id="radarSvg" width="270" height="250" viewBox="0 0 270 250"></svg>
+      <div style="max-width:320px">
+        <b>五维雷达图</b>
+        <p class="tip">对每个你用过的 AI 工具打分（准确性、鼓励性、可行性、实用性、个性化适配度——课程指定的评估维度）。多工具对比图直接截图进简报与反思报告，是「人机协作反思」的硬核素材。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>粤讲粤掂 Cantonese Learning Hub · 学习数据仅保存在本机浏览器（localStorage），清除浏览器数据会丢失，建议定期导出日志与录音 · 配套文档：outputs/cantonese-3week-plan.md · outputs/A-plus-report-kit.md</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 数据 ============ */
+const INITIALS=[
+{jp:'b',ipa:'[p]',ex:'巴 baa1',note:'= 普通话 b',d:0},{jp:'p',ipa:'[pʰ]',ex:'怕 paa3',note:'= 普通话 p',d:0},
+{jp:'m',ipa:'[m]',ex:'妈 maa1',note:'= 普通话 m',d:0},{jp:'f',ipa:'[f]',ex:'花 faa1',note:'= 普通话 f',d:0},
+{jp:'d',ipa:'[t]',ex:'打 daa2',note:'= 普通话 d',d:0},{jp:'t',ipa:'[tʰ]',ex:'他 taa1',note:'= 普通话 t',d:0},
+{jp:'n',ipa:'[n]',ex:'那 naa5',note:'注意与 l 分清（你 nei5 ≠ 李 lei5）',d:1},{jp:'l',ipa:'[l]',ex:'啦 laa1',note:'边音，别把 n 读成 l',d:1},
+{jp:'g',ipa:'[k]',ex:'家 gaa1',note:'= 普通话 g',d:0},{jp:'k',ipa:'[kʰ]',ex:'卡 kaa1',note:'= 普通话 k',d:0},
+{jp:'ng',ipa:'[ŋ]',ex:'牙 ngaa4',note:'舌根鼻音：先哼「嗯」保持喉震再张嘴',d:2},{jp:'h',ipa:'[h]',ex:'虾 haa1',note:'喉擦音，比普通话 h 轻而靠喉',d:1},
+{jp:'gw',ipa:'[kʷ]',ex:'瓜 gwaa1',note:'圆唇化的 g（g+u 快速连读）',d:2},{jp:'kw',ipa:'[kʷʰ]',ex:'夸 kwaa1',note:'圆唇化的 k',d:2},
+{jp:'w',ipa:'[w]',ex:'蛙 waa1',note:'= 普通话 w',d:0},
+{jp:'z',ipa:'[ts]',ex:'渣 zaa1',note:'≈ 普通话 z，但绝不翘舌',d:1},{jp:'c',ipa:'[tsʰ]',ex:'叉 caa1',note:'≈ 普通话 c，平舌',d:1},
+{jp:'s',ipa:'[s]',ex:'沙 saa1',note:'≈ 普通话 s',d:0},{jp:'j',ipa:'[j]',ex:'也 jaa5',note:'= 普通话 y（粤拼写作 j）',d:0}
+];
+const FINALS_ROWS=[
+{n:'aa',hint:'长 a',cells:[['沙','saa1'],['街','gaai1'],['猫','maau1'],['三','saam1'],['山','saan1'],['猛','maang2'],['集','zaap6'],['八','baat3'],['白','baak6']],hot:1},
+{n:'a',hint:'短 a',cells:[null,['世','sai3'],['走','zau2'],['心','sam1'],['新','san1'],['更','gang1'],['十','sap6'],['七','cat1'],['北','bak1']],hot:1},
+{n:'e',hint:'[ɛ]',cells:[['遮','ze1'],['四','sei3'],null,null,null,['饼','beng2'],null,null,['尺','cek3']]},
+{n:'i',hint:'= i',cells:[['诗','si1'],null,['笑','siu3'],['剑','gim3'],['见','gin3'],['性','sing3'],['贴','tip3'],['热','jit6'],['识','sik1']]},
+{n:'o',hint:'[ɔ] 圆唇',cells:[['哥','go1'],['爱','oi3'],['好','hou2'],null,['安','on1'],['康','hong1'],null,['渴','hot3'],['学','hok6']]},
+{n:'u',hint:'= u',cells:[['姑','gu1'],['回','wui4'],null,null,['欢','fun1'],['红','hung4'],null,['活','wut6'],['六','luk6']]},
+{n:'oe',hint:'[œ] 圆唇',cells:[['靴','hoe1'],null,null,null,null,['香','hoeng1'],null,null,['脚','goek3']],hot:2},
+{n:'eo',hint:'[ɵ] 圆唇',cells:[null,['水','seoi2'],null,null,['春','ceon1'],null,null,['出','ceot1'],null],hot:2},
+{n:'yu',hint:'= ü',cells:[['书','syu1'],null,null,null,['算','syun3'],null,null,['雪','syut3'],null],hot:2}
+];
+const FINALS_TAILS=['∅','i','u','m','n','ng','p','t','k'];
+const TONES=[
+{n:1,name:'阴平',cv:'55 高平',ch:'诗',jp:'si1',like:'= 普通话一声',c:'#7c3aed'},
+{n:2,name:'阴上',cv:'35 高升',ch:'史',jp:'si2',like:'= 普通话二声的升势',c:'#a855f7'},
+{n:3,name:'阴去',cv:'33 中平',ch:'试',jp:'si3',like:'普通话没有，比一声低',c:'#db2777'},
+{n:4,name:'阳平',cv:'21 低降',ch:'时',jp:'si4',like:'≈ 只降不升的「半三声」',c:'#e11d48'},
+{n:5,name:'阳上',cv:'13 低升',ch:'市',jp:'si5',like:'像疑问语气「啊？」',c:'#f97316'},
+{n:6,name:'阳去',cv:'22 低平',ch:'是',jp:'si6',like:'低沉平念，像低声「嗯——」',c:'#0891b2'}
+];
+const TSAP={p:[['湿','sap1'],['十','sap6'],['叶','jip6'],['贴','tip3']],t:[['一','jat1'],['七','cat1'],['八','baat3'],['发','faat3']],k:[['六','luk6'],['白','baak6'],['识','sik1'],['学','hok6']]};
+const VOCAB={
+'greet':{name:'问候·礼貌',items:[
+{w:'你好',jp:'nei5 hou2',m:'你好',s:'你好，请坐。nei5 hou2, cing2 co5.'},
+{w:'早晨',jp:'zou2 san4',m:'早上好',s:'王生，早晨！wong4 saang1, zou2 san4!'},
+{w:'早抖',jp:'zou2 tau2',m:'晚安',s:'我瞓觉喇，早抖。ngo5 fan3 gaau3 laa3, zou2 tau2.'},
+{w:'唔该',jp:'m4 goi1',m:'谢谢（麻烦人时）/劳驾',s:'唔该，借借。m4 goi1, ze3 ze3.'},
+{w:'多谢',jp:'do1 ze6',m:'谢谢（收到东西时）',s:'多谢你嘅礼物。do1 ze6 nei5 ge3 lai5 mat6.'},
+{w:'对唔住',jp:'deoi3 m4 zyu6',m:'对不起',s:'对唔住，我迟到咗。deoi3 m4 zyu6, ngo5 ci4 dou6 zo2.'},
+{w:'唔好意思',jp:'m4 hou2 ji3 si1',m:'不好意思',s:'唔好意思，阻你一阵。m4 hou2 ji3 si1, zo2 nei5 jat1 zan6.'},
+{w:'唔紧要',jp:'m4 gan2 jiu3',m:'没关系',s:'—对唔住！—唔紧要。deoi3 m4 zyu6! m4 gan2 jiu3.'},
+{w:'食咗饭未',jp:'sik6 zo2 faan6 mei6',m:'吃了吗（粤语问候语）',s:'食咗饭未啊？sik6 zo2 faan6 mei6 aa3?'},
+{w:'唔使客气',jp:'m4 sai2 haak3 hei3',m:'不客气',s:'小事，唔使客气。siu2 si6, m4 sai2 haak3 hei3.'},
+{w:'拜拜',jp:'baai1 baai3',m:'再见',s:'听日见，拜拜！ting3 jat6 gin3, baai1 baai3!'},
+{w:'唔该晒',jp:'m4 goi1 saai3',m:'太感谢了（晒=完全）',s:'今日唔该晒你！gam1 jat6 m4 goi1 saai3 nei5!'}]},
+'basic':{name:'日常高频',items:[
+{w:'系',jp:'hai6',m:'是',s:'我系学生。ngo5 hai6 hok6 saang1.'},
+{w:'唔系',jp:'m4 hai6',m:'不是',s:'呢个唔系我嘅。ni1 go3 m4 hai6 ngo5 ge3.'},
+{w:'冇',jp:'mou5',m:'没有',s:'我冇钱。ngo5 mou5 cin2.'},
+{w:'有冇',jp:'jau5 mou5',m:'有没有',s:'你有冇空？nei5 jau5 mou5 hung3?'},
+{w:'乜嘢',jp:'mat1 je5',m:'什么',s:'你讲乜嘢？nei5 gong2 mat1 je5?'},
+{w:'边度',jp:'bin1 dou6',m:'哪里',s:'厕所喺边度？ci3 so2 hai2 bin1 dou6?'},
+{w:'点解',jp:'dim2 gaai2',m:'为什么',s:'点解咁贵嘅？dim2 gaai2 gam3 gwai3 ge3?'},
+{w:'几时',jp:'gei2 si4',m:'什么时候',s:'你几时得闲？nei5 gei2 si4 dak1 haan4?'},
+{w:'而家',jp:'ji4 gaa1',m:'现在',s:'而家几点？ji4 gaa1 gei2 dim2?'},
+{w:'听日',jp:'ting3 jat6',m:'明天',s:'听日我哋出街。ting3 jat6 ngo5 dei6 ceot1 gaai1.'},
+{w:'寻日',jp:'cam4 jat6',m:'昨天',s:'寻日落雨。cam4 jat6 lok6 jyu5.'},
+{w:'睇',jp:'tai2',m:'看',s:'我哋睇戏好唔好？ngo5 dei6 tai2 hei3 hou2 m4 hou2?'},
+{w:'听',jp:'teng1',m:'听',s:'我听唔明。ngo5 teng1 m4 ming4.'},
+{w:'讲',jp:'gong2',m:'说',s:'你讲多次。nei5 gong2 doi1 ci3.'},
+{w:'食',jp:'sik6',m:'吃',s:'食饭喇！sik6 faan6 laa3!'},
+{w:'饮',jp:'jam2',m:'喝',s:'饮啖汤。jam2 daam6 tong1.'},
+{w:'瞓',jp:'fan3',m:'睡',s:'我好眼瞓。ngo5 hou2 ngaan5 fan3.'},
+{w:'企',jp:'kei5',m:'站',s:'唔好企喺度。m4 hou2 kei5 hai2 dou6.'},
+{w:'行',jp:'haang4',m:'走；步行',s:'我行去地铁站。ngo5 haang4 heoi3 dei6 tit3 zaam6.'},
+{w:'畀',jp:'bei2',m:'给（语序：物+人）',s:'畀杯水我。bei2 bui1 seoi2 ngo5.'},
+{w:'攞',jp:'lo2',m:'拿',s:'帮我攞下书包。bang1 ngo5 lo2 haa5 syu1 baau1.'},
+{w:'佢',jp:'keoi5',m:'他/她',s:'佢系我同学。keoi5 hai6 ngo5 tung4 hok6.'},
+{w:'我哋',jp:'ngo5 dei6',m:'我们',s:'我哋一齐去。ngo5 dei6 jat1 cai4 heoi3.'},
+{w:'嘅',jp:'ge3',m:'的',s:'呢个系我嘅电脑。ni1 go3 hai6 ngo5 ge3 din6 nou5.'},
+{w:'喺',jp:'hai2',m:'在',s:'我喺图书馆。ngo5 hai2 tou4 syu1 gun2.'},
+{w:'嚟',jp:'lai4',m:'来',s:'你嚟我度啦。nei5 lai4 ngo5 dou6 laa1.'},
+{w:'仲',jp:'zau6',m:'还；更',s:'仲有咩讲？zau6 jau5 me1 gong2?'},
+{w:'咗',jp:'zo2',m:'了（完成）',s:'我食咗饭喇。ngo5 sik6 zo2 faan6 laa3.'},
+{w:'紧',jp:'gan2',m:'正在（V+紧）',s:'我食紧饭。ngo5 sik6 gan2 faan6.'},
+{w:'啲',jp:'di1',m:'些；一点',s:'行快啲！haang4 faai3 di1!'},
+{w:'好叻',jp:'hou2 lek1',m:'好厉害',s:'你识讲广东话，好叻呀！nei5 sik1 gong2 gwong2 dung1 waa2, hou2 lek1 aa3!'},
+{w:'好攰',jp:'hou2 gui6',m:'好累',s:'今日好攰呀。gam1 jat6 hou2 gui6 aa3.'},
+{w:'得闲',jp:'dak1 haan4',m:'有空',s:'你得闲饮茶。nei5 dak1 haan4 jam2 caa4.'},
+{w:'是但',jp:'si6 daan6',m:'随便',s:'食咩？—是但啦。sik6 me1? si6 daan6 laa1.'}]},
+'num':{name:'数字·金钱',items:[
+{w:'一',jp:'jat1',m:'一（入声 -t）',s:'一二三四五。jat1 ji6 saam1 sei3 ng5.'},
+{w:'六',jp:'luk6',m:'六（入声 -k）',s:'六点起身。luk6 dim2 hei2 san1.'},
+{w:'七',jp:'cat1',m:'七（入声 -t）',s:'七点半。cat1 dim2 bun3.'},
+{w:'十',jp:'sap6',m:'十（入声 -p）',s:'十蚊鸡。sap6 man1 gai1.'},
+{w:'蚊',jp:'man1',m:'元（钱）',s:'呢个卖廿蚊。ni1 go3 maai6 jaa6 man1.'},
+{w:'几多钱',jp:'gei2 do1 cin4',m:'多少钱',s:'唔该，几多钱？m4 goi1, gei2 do1 cin4?'},
+{w:'平',jp:'peng4',m:'便宜',s:'呢间嘢好平。ni1 gaan1 je5 hou2 peng4.'},
+{w:'贵',jp:'gwai3',m:'贵',s:'太贵喇！taai3 gwai3 laa3!'},
+{w:'埋单',jp:'maai4 daan1',m:'结账',s:'唔该埋单。m4 goi1 maai4 daan1.'},
+{w:'八达通',jp:'baat3 daat6 tung1',m:'八达通卡',s:'拍八达通。paak3 baat3 daat6 tung1.'},
+{w:'找钱',jp:'zaau2 cin2',m:'找零钱',s:'唔使找喇。m4 sai2 zaau2 laa3.'},
+{w:'一百万',jp:'jat1 baak3 maan6',m:'一百万',s:'中咗一百万！zung3 zo2 jat1 baak3 maan6!'}]},
+'food':{name:'茶餐厅·饮食',items:[
+{w:'饮茶',jp:'jam2 caa4',m:'喝早茶/饮茶',s:'得闲饮茶！dak1 haan4 jam2 caa4!'},
+{w:'奶茶',jp:'naai5 caa4',m:'奶茶',s:'冻奶茶，少甜。dung3 naai5 caa4, siu2 tim4.'},
+{w:'冻柠茶',jp:'dung3 ning4 caa4',m:'冰柠檬茶',s:'一杯冻柠茶走甜。jat1 bui1 dung3 ning4 caa4 zau2 tim4.'},
+{w:'咖啡',jp:'gaa3 fe1',m:'咖啡',s:'斋啡，唔该。zaai1 fe1, m4 goi1.'},
+{w:'菠萝油',jp:'bo1 lo4 jau4',m:'黄油菠萝包',s:'一个菠萝油，堂食。jat1 go3 bo1 lo4 jau4, tong4 sik6.'},
+{w:'蛋挞',jp:'daan6 taat1',m:'蛋挞',s:'呢度啲蛋挞好出名。ni1 dou6 di1 daan6 taat1 hou2 ceot1 ming2.'},
+{w:'叉烧',jp:'caa1 siu1',m:'叉烧',s:'叉烧饭，加底。caa1 siu1 faan6, gaa1 dai2.'},
+{w:'烧鹅',jp:'siu1 ngo4',m:'烧鹅',s:'深井烧鹅好有名。sam1 zeng2 siu1 ngo4 hou5 jau5 ming4.'},
+{w:'白饭',jp:'baak6 faan6',m:'白米饭',s:'一碗白饭。jat1 wun2 baak6 faan6.'},
+{w:'落单',jp:'lok6 daan2',m:'点单',s:'唔该，落单。m4 goi1, lok6 daan2.'},
+{w:'堂食',jp:'tong4 sik6',m:'在店里吃',s:'堂食定外卖？tong4 sik6 ding6 ngoi6 maai6?'},
+{w:'外卖',jp:'ngoi6 maai6',m:'外带',s:'外卖，唔该。ngoi6 maai6, m4 goi1.'},
+{w:'走甜',jp:'zau2 tim4',m:'不加糖',s:'冻柠茶走甜。dung3 ning4 caa4 zau2 tim4.'},
+{w:'好食',jp:'hou2 sik6',m:'好吃',s:'真系好食！zan1 hai6 hou2 sik6!'},
+{w:'筷子',jp:'faai3 zi2',m:'筷子',s:'畀对筷子我。bei2 deoi3 faai3 zi2 ngo5.'},
+{w:'饮管',jp:'jam2 gun2',m:'吸管',s:'唔使饮管，多谢。m4 sai2 jam2 gun2, do1 ze6.'},
+{w:'靓',jp:'leng3',m:'漂亮',s:'呢间餐厅好靓。ni1 gaan1 caan1 teng1 hou2 leng3.'},
+{w:'靓女/靓仔',jp:'leng3 neoi5 / zai2',m:'美女/帅哥（称呼）',s:'唔该，靓女！m4 goi1, leng3 neoi5!'}]},
+'transit':{name:'出行问路',items:[
+{w:'搭车',jp:'daap3 ce1',m:'坐车',s:'我搭地铁返学。ngo5 daap3 dei6 tit3 faan1 hok6.'},
+{w:'巴士',jp:'baa1 si2',m:'公交车',s:'搭几号巴士？daap3 gei2 hou6 baa1 si2?'},
+{w:'地铁',jp:'dei6 tit3',m:'地铁',s:'地铁站喺边度？dei6 tit3 zaam6 hai2 bin1 dou6?'},
+{w:'的士',jp:'dik1 si2',m:'出租车',s:'截的士。zik6 dik1 si2.'},
+{w:'落车',jp:'lok6 ce1',m:'下车',s:'前面有得落车。cin4 min6 jau5 dak1 lok6 ce1.'},
+{w:'转车',jp:'zyun2 ce1',m:'换乘',s:'下一站转车。haa6 jat1 zaam6 zyun2 ce1.'},
+{w:'买飞',jp:'maai5 fei1',m:'买票',s:'喺边度买飞？hai2 bin1 dou6 maai5 fei1?'},
+{w:'出口',jp:'ceot1 hau2',m:'出口',s:'A出口。A ceot1 hau2.'},
+{w:'入口',jp:'jap6 hau2',m:'入口',s:'由入口入。jau4 jap6 hau2 jap6.'},
+{w:'月台',jp:'jyut6 toi4',m:'站台',s:'三号月台。saam1 hou6 jyut6 toi4.'},
+{w:'转左/转右',jp:'zyun2 zo2 / jau6',m:'左转/右转',s:'前面路口转左。cin4 min6 lau6 hau2 zyun2 zo2.'},
+{w:'直行',jp:'zik6 haang4',m:'直走',s:'直行二百米就到。zik6 haang4 ji6 baak3 mai5 zau6 dou3.'},
+{w:'行几远',jp:'haang4 gei2 jyun5',m:'走多远',s:'仲要行几远？zau6 jiu3 haang4 gei2 jyun5?'},
+{w:'唔该，请问…',jp:'m4 goi1, cing2 man6…',m:'劳驾，请问…',s:'唔该，请问深圳湾点去？m4 goi1, cing2 man6 sam1 zan3 waan1 dim2 heoi3?'}]},
+'campus':{name:'校园学习',items:[
+{w:'上堂',jp:'soeng6 tong4',m:'上课',s:'九点上堂。gau2 dim2 soeng6 tong4.'},
+{w:'走堂',jp:'zau2 tong4',m:'缺课',s:'佢今日走堂。keoi5 gam1 jat6 zau2 tong4.'},
+{w:'功课',jp:'gung1 fo3',m:'作业',s:'今晚做功课。gam1 maan5 zou6 gung1 fo3.'},
+{w:'交功课',jp:'gaau1 gung1 fo3',m:'交作业',s:'礼拜五交功课。lai5 baai3 ng5 gaau1 gung1 fo3.'},
+{w:'温书',jp:'wan1 syu1',m:'复习',s:'考试前要温书。hau3 si5 cin4 jiu3 wan1 syu1.'},
+{w:'测验',jp:'cak1 jim6',m:'小测',s:'听日有测验。ting3 jat6 jau5 cak1 jim6.'},
+{w:'考试',jp:'hau3 si5',m:'考试',s:'考试周好忙。hau3 si5 zau1 hou2 mong4.'},
+{w:'课室',jp:'fo3 sat1',m:'教室',s:'课室喺三楼。fo3 sat1 hai2 saam1 lau2.'},
+{w:'图书馆',jp:'tou4 syu1 gun2',m:'图书馆',s:'我去图书馆温书。ngo5 heoi3 tou4 syu1 gun2 wan1 syu1.'},
+{w:'同学',jp:'tung4 hok6',m:'同学',s:'呢位系我同学。ni1 wai2 hai6 ngo5 tung4 hok6.'},
+{w:'老师',jp:'lou5 si1',m:'老师',s:'陈老师好好人。can4 lou5 si1 hou2 hou2 jan4.'},
+{w:'返学',jp:'faan1 hok6',m:'上学',s:'我朝早八点返学。ngo5 ziu1 zou2 baat3 dim2 faan1 hok6.'},
+{w:'放学',jp:'fong3 hok6',m:'放学',s:'放学一齐食嘢？fong3 hok6 jat1 cai4 sik6 je5?'},
+{w:'宿舍',jp:'suk1 se3',m:'宿舍',s:'我住宿舍。ngo5 zyu6 suk1 se3.'},
+{w:'食嘢',jp:'sik6 je5',m:'吃东西',s:'肚饿，去食嘢。tou5 ngo6, heoi3 sik6 je5.'}]},
+'cs':{name:'计算机专业',items:[
+{w:'电脑',jp:'din6 nou5',m:'电脑',s:'我部电脑坏咗。ngo5 bou6 din6 nou5 waai6 zo2.'},
+{w:'手提电脑',jp:'sau2 tai4 din6 nou5',m:'笔记本电脑',s:'买咗部新嘅手提电脑。maai5 zo2 bou6 san1 ge3 sau2 tai4 din6 nou5.'},
+{w:'软件',jp:'jyun5 gin3',m:'软件',s:'装个新软件。zong1 go3 san1 jyun5 gin3.'},
+{w:'硬件',jp:'ngaang6 gin3',m:'硬件',s:'硬件同软件都识。ngaang6 gin3 tung4 jyun5 gin3 dou1 sik1.'},
+{w:'硬盘',jp:'ngaang6 pun4',m:'硬盘',s:'个硬盘冇位喇。go3 ngaang6 pun4 mou5 wai2 laa3.'},
+{w:'屏幕',jp:'ping3 muk6',m:'屏幕',s:'块屏幕好靓。faai3 ping3 muk6 hou2 leng3.'},
+{w:'滑鼠',jp:'waat6 syu2',m:'鼠标',s:'个滑鼠冇电。go3 waat6 syu2 mou5 din6.'},
+{w:'键盘',jp:'gin3 pun4',m:'键盘',s:'机械键盘好正。gaai6 zat3 gin3 pun4 hou2 zeng3.'},
+{w:'上网',jp:'soeng6 mong5',m:'上网',s:'宿舍可以免费上网。suk1 se3 ho2 ji5 min6 faai2 soeng6 mong5.'},
+{w:'下载',jp:'haa6 zaai6',m:'下载',s:'下载速度快。haa6 zaai6 sok1 dou6 faai3.'},
+{w:'数据',jp:'sou3 geoi3',m:'数据',s:'数据结构好难。sou3 geoi3 git3 kau3 hou2 naan4.'},
+{w:'程式',jp:'cing4 sik1',m:'程序（港式说法）',s:'写程式（口语多讲写 code）。se2 cing4 sik1.'},
+{w:'伺服器',jp:'ci6 fu6 hei3',m:'服务器',s:'伺服器 down 咗。ci6 fu6 hei3 down zo2.'},
+{w:'人工智能',jp:'jan4 gung3 zi3 nang4',m:'人工智能',s:'人工智能改变世界。jan4 gung3 zi3 nang4 goi2 bin3 sai3 gaai3.'},
+{w:'算法',jp:'syun3 faat3',m:'算法',s:'呢条算法好聪明。ni1 tiu4 syun3 faat3 hou2 cung1 ming4.'},
+{w:'网络',jp:'mong5 luk3',m:'网络',s:'网络唔稳定。mong5 luk3 m4 wan6 ding6.'},
+{w:'系统',jp:'hai6 tung2',m:'系统',s:'更新个系统。gung2 san1 go3 hai6 tung2.'},
+{w:'界面',jp:'gaai3 min6',m:'界面',s:'个界面好易用。go3 gaai3 min6 hou2 ji6 jung6.'},
+{w:'叉电',jp:'caa3 din6',m:'充电（口语）',s:'帮我叉下电。bang1 ngo5 caa3 haa5 din6.'},
+{w:'坏咗',jp:'waai6 zo2',m:'坏了',s:'部机坏咗。bou6 gei1 waai6 zo2.'},
+{w:'打机',jp:'daa2 gei1',m:'玩游戏',s:'放学一齐打机。fong3 hok6 jat1 cai4 daa2 gei1.'},
+{w:'落 bug',jp:'lok6 bug',m:'debug（港式 IT 口语）',s:'今晚要落 bug。gam1 maan5 jiu3 lok6 bug.'}]},
+'job':{name:'求职面试',items:[
+{w:'见工',jp:'gin3 gung1',m:'去面试/求职',s:'听日去见工。ting3 jat6 heoi3 gin3 gung1.'},
+{w:'面试',jp:'min6 si5',m:'面试',s:'面试好顺利。min6 si5 hou2 seon6 lei6.'},
+{w:'履历表',jp:'leoi5 lik6 biu2',m:'简历',s:'我哋收到你嘅履历表。ngo5 dei6 sau1 dou3 nei5 ge3 leoi5 lik6 biu2.'},
+{w:'自我介绍',jp:'zi6 ngo5 gaai3 siu6',m:'自我介绍',s:'请简单自我介绍。cing2 gaan2 daai6 zi6 ngo5 gaai3 siu6.'},
+{w:'应徵',jp:'jing3 zing1',m:'应聘',s:'我应徵呢个职位。ngo5 jing3 zing1 ni1 go3 zik1 wai2.'},
+{w:'职位',jp:'zik1 wai2',m:'职位',s:'呢个职位有咩要求？ni1 go3 zik1 wai6 jau5 me1 jiu3 kau4?'},
+{w:'人工',jp:'jan4 gung1',m:'工资',s:'人工几多？jan4 gung1 gei2 do1?'},
+{w:'老细',jp:'lou5 sai3',m:'老板',s:'我老细好好人。ngo5 lou5 sai3 hou2 hou2 jan4.'},
+{w:'同事',jp:'tung4 si6',m:'同事',s:'同事之间互相帮助。tung4 si6 zi1 gaan1 wu6 soeng1 bang1 zo6.'},
+{w:'加班',jp:'gaa1 baan1',m:'加班',s:'成日加班唔健康。seng4 jat6 gaa1 baan1 m4 gin6 hong1.'},
+{w:'团队',jp:'tyun4 deoi2',m:'团队',s:'团队合作好重要。tyun4 deoi2 hap6 zok3 hou2 zung6 jiu3.'},
+{w:'合作',jp:'hap6 zok3',m:'合作',s:'好开心同你哋合作。hou2 hoi1 sam1 tung4 nei5 dei6 hap6 zok3.'},
+{w:'沟通',jp:'kau1 tung1',m:'沟通',s:'沟通能力好重要。kau1 tung1 nang4 lik6 hou2 zung6 jiu3.'},
+{w:'压力',jp:'aat3 lik6',m:'压力',s:'我顶得住压力。ngo5 ding2 dak1 zyu6 aat3 lik6.'},
+{w:'责任',jp:'zaak3 jam6',m:'责任',s:'我系一个有责任心嘅人。ngo5 hai6 jat1 go3 jau5 zaak3 jam6 sam1 ge3 jan4.'},
+{w:'经验',jp:'ging1 jim6',m:'经验',s:'我有相关嘅项目经验。ngo5 jau5 soeng1 gwon1 ge3 hong6 min6 ging1 jim6.'},
+{w:'机会',jp:'gei1 wui2',m:'机会',s:'多谢你哋畀呢个机会我。do1 ze6 nei5 dei6 bei2 ni1 go3 gei1 wui2 ngo5.'},
+{w:'请问',jp:'cing2 man6',m:'请问',s:'想请问一下工作内容。soeng2 cing2 man6 jat1 haa5 gung1 zok3 jung4 jip6.'}]},
+'complaint':{name:'投诉沟通',items:[
+{w:'投诉',jp:'tau4 sou3',m:'投诉',s:'我想投诉。ngo5 soeng2 tau4 sou3.'},
+{w:'服务',jp:'fuk6 mou6',m:'服务',s:'服务态度好差。fuk6 mou6 taai3 dou6 hou2 caa1.'},
+{w:'坏咗',jp:'waai6 zo2',m:'坏了',s:'用咗两日就坏咗。jung6 zo2 loeng5 jat6 zau6 waai6 zo2.'},
+{w:'退货',jp:'teoi3 fo3',m:'退货',s:'我想退货。ngo5 soeng2 teoi3 fo3.'},
+{w:'退款',jp:'teoi3 fun2',m:'退款',s:'要求全额退款。jiu3 kau4 cyun4 kwaan4 teoi3 fun2.'},
+{w:'收据',jp:'sau1 geoi3',m:'收据',s:'有冇收据？jau5 mou5 sau1 geoi3?'},
+{w:'发票',jp:'faat3 piu3',m:'发票',s:'发票喺度。faat3 piu3 hai2 dou6.'},
+{w:'维修',jp:'wai4 sau1',m:'维修',s:'维修要几个工作日？wai4 sau1 jiu3 gei2 go3 gung1 zok3 jat6?'},
+{w:'保修',jp:'bou2 sau1',m:'保修',s:'仲喺保修期内。zau6 hai2 bou2 sau1 kei4 noi6.'},
+{w:'跟进',jp:'gan1 zeon3',m:'跟进处理',s:'我会尽快跟进。ngo5 wui5 zeon3 faai3 gan1 zeon3.'},
+{w:'负责人',jp:'fu6 zak1 jan4',m:'负责人',s:'请叫负责人嚟。cing2 giu3 fu6 zak1 jan4 lai4.'},
+{w:'尽快',jp:'zeon3 faai3',m:'尽快',s:'希望尽快回复。hei1 mong6 zeon3 faai3 wui6 fuk1.'},
+{w:'唔满意',jp:'m4 mun5 ji3',m:'不满意',s:'我对呢次服务好唔满意。ngo5 deoi3 ni1 ci3 fuk6 mou6 hou2 m4 mun5 ji3.'},
+{w:'换',jp:'wun6',m:'换（货）',s:'可唔可以换过部新嘅？ho2 m4 ho2 ji5 wun6 gwo3 bou6 san1 ge3?'},
+{w:'登记',jp:'dang1 gei3',m:'登记',s:'我帮你登记个案。ngo5 bang1 nei5 dang1 gei3 go3 on3.'},
+{w:'回复',jp:'wui6 fuk1',m:'回复',s:'三个工作日之内回复。saam1 go3 gung1 zok3 jat6 zi1 noi6 wui6 fuk1.'}]},
+'phrase':{name:'高频短语',items:[
+{w:'唔该，借借',jp:'m4 goi1, ze3 ze3',m:'劳驾借过',s:'借借，我要落车。ze3 ze3, ngo5 jiu3 lok6 ce1.'},
+{w:'冇问题',jp:'mou5 man6 tai4',m:'没问题',s:'小事，冇问题。siu2 si6, mou5 man6 tai4.'},
+{w:'得唔得',jp:'dak1 m4 dak1',m:'行不行',s:'听日得唔得？ting3 jat6 dak1 m4 dak1?'},
+{w:'好唔好',jp:'hou2 m4 hou2',m:'好不好',s:'我哋去饮茶好唔好？ngo5 dei6 heoi3 jam2 caa4 hou2 m4 hou2?'},
+{w:'系咪',jp:'hai6 mai6',m:'是不是',s:'你系咪深圳学院嘅？nei5 hai6 mai6 sam1 zan3 hok6 jyun6 ge3?'},
+{w:'唔该等我一阵',jp:'m4 goi1 dang2 ngo5 jat1 zan6',m:'请等我一下',s:'等我一阵，就好。dang2 ngo5 jat1 zan6, zau6 hou2.'},
+{w:'我识讲少少',jp:'ngo5 sik1 gong2 siu2 siu2',m:'我会说一点点',s:'广东话我识讲少少。gwong2 dung1 waa2 ngo5 sik1 gong2 siu2 siu2.'},
+{w:'唔好意思，我听唔明',jp:'m4 hou2 ji3 si1, ngo5 teng1 m4 ming4',m:'抱歉我听不懂',s:'可以讲多次吗？ho2 m4 ho2 ji5 gong2 doi1 ci3 maa3?'},
+{w:'唔使急',jp:'m4 sai2 gap1',m:'不用急',s:'唔使急，最紧要食饭。m4 sai2 gap1, zeoi3 gan2 jiu3 sik6 faan6.'},
+{w:'有咩可以帮到你',jp:'jau5 me1 ho2 ji5 bang1 dou3 nei5',m:'有什么可以帮到你',s:'你好，有咩可以帮到你？nei5 hou2, jau5 me1 ho2 ji5 bang1 dou3 nei5?'},
+{w:'蚀底',jp:'sit6 dai1',m:'吃亏',s:'咁样做好蚀底。gam2 joeng6 zou6 hou2 sit6 dai1.'},
+{w:'抵',jp:'dai2',m:'划算',s:'呢个价真系抵。ni1 go3 gaa3 zan1 hai6 dai2.'}]}
+};
+const CONVS=[
+{name:'☕ 茶餐厅',rows:[
+{who:'你',w:'唔该，我想落单。',jp:'m4 goi1, ngo5 soeng2 lok6 daan2.',m:'劳驾，我想点单。'},
+{who:'伙计',w:'好，想食啲乜？',jp:'hou2, soeng2 sik6 di1 mat1?',m:'好，想吃点什么？'},
+{who:'你',w:'一个菠萝油，一杯冻柠茶走甜。',jp:'jat1 go3 bo1 lo4 jau4, jat1 bui1 dung3 ning4 caa4 zau2 tim4.',m:'一个菠萝油，一杯冰柠檬茶不加糖。'},
+{who:'伙计',w:'堂食定外卖？',jp:'tong4 sik6 ding6 ngoi6 maai6?',m:'堂食还是外带？'},
+{who:'你',w:'堂食，唔该。',jp:'tong4 sik6, m4 goi1.',m:'堂食，谢谢。'},
+{who:'伙计',w:'唔好意思，等咗好耐。',jp:'m4 hou2 ji3 si1, dang2 zo2 hou2 noi6.',m:'不好意思，让您久等了。'},
+{who:'你',w:'唔紧要。埋单，几多钱？',jp:'m4 gan2 jiu3. maai4 daan1, gei2 do1 cin4?',m:'没关系。结账，多少钱？'},
+{who:'伙计',w:'三十八蚊，多谢晒！',jp:'saam1 sap6 baat3 man1, do1 ze6 saai3!',m:'三十八块，非常感谢！'}]},
+{name:'🗺️ 问路',rows:[
+{who:'你',w:'唔该，请问地铁站喺边度？',jp:'m4 goi1, cing2 man6 dei6 tit3 zaam6 hai2 bin1 dou6?',m:'劳驾，请问地铁站在哪里？'},
+{who:'路人',w:'喺前面，转左就系。',jp:'hai2 cin4 min6, zyun2 zo2 zau6 hai6.',m:'在前面，左转就是。'},
+{who:'你',w:'行几远？',jp:'haang4 gei2 jyun5?',m:'要走多远？'},
+{who:'路人',w:'五分钟左右。',jp:'ng5 fung1 zung1*2 zo2 jau6.',m:'五分钟左右。'},
+{who:'你',w:'唔该晒！',jp:'m4 goi1 saai3!',m:'太感谢了！'},
+{who:'路人',w:'唔使客气。',jp:'m4 sai2 haak3 hei3.',m:'不客气。'}]},
+{name:'💼 见工面试',rows:[
+{who:'面试官',w:'你好，请简单介绍下你自己。',jp:'nei5 hou2, cing2 gaan2 daai6 gaai3 siu6 haa5 nei5 zi6 gei2.',m:'你好，请简单介绍一下你自己。'},
+{who:'你',w:'你好，我叫阿明，系计算机科学与技术专业嘅一年级学生。',jp:'nei5 hou2, ngo5 giu3 aa3 ming4, hai6 gai3 syun3 gei1 fo1 hok6 jyu5 gei6 seot6 zun1 jip6 ge3 jat1 nin4 kap1 hok6 saang1.',m:'你好，我叫阿明，是计算机科学与技术专业的大一学生。'},
+{who:'你',w:'我平时钟意写程式，最近仲用 AI 学紧广东话。',jp:'ngo5 ping4 si4 zung1 ji3 se2 cing4 sik1, zeoi6 gan6 zau6 jung6 AI hok6 gan2 gwong2 dung1 waa2.',m:'我平时喜欢编程，最近还在用 AI 学粤语。'},
+{who:'面试官',w:'你点睇团队合作？',jp:'nei5 dim2 tai2 tyun4 deoi2 hap6 zok3?',m:'你怎么看团队合作？'},
+{who:'你',w:'我觉得好重要，写程式好多时要一齐解决问题。',jp:'ngo5 gok3 dak1 hou2 zung6 jiu3, se2 cing4 sik1 hou2 do1 si4 jiu3 jat1 cai4 gaai2 kyut3 man6 tai4.',m:'我觉得很重要，编程很多时候要一起解决问题。'},
+{who:'你',w:'想请问一下，呢个职位嘅工作内容系乜嘢？',jp:'soeng2 cing2 man6 jat1 haa5, ni1 go3 zik1 wai6 ge3 gung1 zok3 jung4 jip6 hai6 mat1 je5?',m:'想问一下，这个职位的工作内容是什么？'},
+{who:'面试官',w:'好嘅，我哋迟啲再联络你。',jp:'hou2 ge3, ngo5 dei6 ci4 di1 zoi3 lyun3 lok6 nei5.',m:'好的，我们稍后再联系你。'}]},
+{name:'🔧 投诉与回应',rows:[
+{who:'你',w:'唔好意思，我想投诉。',jp:'m4 hou2 ji3 si1, ngo5 soeng2 tau4 sou3.',m:'不好意思，我想投诉。'},
+{who:'客服',w:'请讲，发生咩事？',jp:'cing2 gong2, faat1 sang4 me1 si6?',m:'请讲，发生了什么事？'},
+{who:'你',w:'我上个礼拜喺你哋网店买咗部手提电脑，用咗两日就坏咗。',jp:'ngo5 soeng6 go3 lai5 baai3 hai2 nei5 dei6 mong6 dim3 maai5 zo2 bou6 sau2 tai4 din6 nou5, jung6 zo2 loeng5 jat6 zau6 waai6 zo2.',m:'我上周在你们网店买了台笔记本，用了两天就坏了。'},
+{who:'客服',w:'唔好意思。有冇收据或者订单号？',jp:'m4 hou2 ji3 si1. jau5 mou5 sau1 geoi3 waak6 ze2 deng6 daan6 hou6?',m:'不好意思。有收据或订单号吗？'},
+{who:'你',w:'有，呢度。我想退货，或者换过部新嘅。',jp:'jau5, ni1 dou6. ngo5 soeng2 teoi3 fo3, waak6 ze2 wun6 gwo3 bou6 san1 ge3.',m:'有，在这里。我想退货，或者换一台新的。'},
+{who:'客服',w:'我帮你登记个案，三个工作日之内畀回复你。',jp:'ngo5 bang1 nei5 dang1 gei3 go3 on3, saam1 go3 gung1 zok3 jat6 zi1 noi6 bei2 wui6 fuk1 nei5.',m:'我帮你登记个案，三个工作日内给你回复。'},
+{who:'你',w:'好，唔该晒。',jp:'hou2, m4 goi1 saai3.',m:'好，谢谢。'}]},
+{name:'🎓 校园',rows:[
+{who:'你',w:'唔该，请问几点上堂？',jp:'m4 goi1, cing2 man6 gei2 dim2 soeng6 tong4?',m:'劳驾，请问几点上课？'},
+{who:'同学',w:'九点半，喺三楼个课室。',jp:'gau2 dim2 bun3, hai2 saam1 lau2 go3 fo3 sat1.',m:'九点半，在三楼的教室。'},
+{who:'你',w:'今日有咩功课要做？',jp:'gam1 jat6 jau5 me1 gung1 fo3 jiu3 zou6?',m:'今天有什么作业要做？'},
+{who:'同学',w:'计算机导论嘅 group project，礼拜五交。',jp:'gai3 syun3 gei1 dou6 lun6 ge3 group project, lai5 baai3 ng5 gaau1.',m:'计算机导论的 group project，周五交。'},
+{who:'你',w:'图书馆今晚开到几点？',jp:'tou4 syu1 gun2 gam1 maan5 hoi1 dou3 gei2 dim2?',m:'图书馆今晚开到几点？'},
+{who:'同学',w:'十点。唔好咁夜先瞓。',jp:'sap6 dim2. m4 hou2 gam3 je6 sin1 fan3.',m:'十点。别熬夜太晚才睡。'}]}
+];
+const GRAMMAR=[
+{t:'唔 / 冇',c:'不 → 唔；没 → 冇',ex:'我不去 → 我<b>唔</b>去；我没吃饭 → 我<b>冇</b>食饭'},
+{t:'A 唔 A 疑问句',c:'…吗 → A唔A？',ex:'你是不是学生 → 你<b>系唔系</b>学生？好不好 → <b>好唔好</b>？'},
+{t:'咗（完成）',c:'了 → V+咗',ex:'吃了 → 食<b>咗</b>；买了 → 买<b>咗</b>'},
+{t:'紧（进行）',c:'正在 → V+紧 / 喺度+V',ex:'我在吃饭 → 我食<b>紧</b>饭 / 我<b>喺度</b>食饭'},
+{t:'畀（给）语序',c:'给+人+物 → 畀+物+人',ex:'给我一杯水 → <b>畀杯水我</b>'},
+{t:'过（比）',c:'比 → 过',ex:'他比我高 → 佢高<b>过我</b>'},
+{t:'修饰语后置',c:'先/慢 → 放句尾',ex:'你先走 → 你行<b>先</b>；慢慢吃 → 食<b>慢啲</b>'},
+{t:'语气词',c:'吗→咩；的→嘅；吧→啩；了→喇',ex:'是吗 → 系<b>咩</b>；走了 → 走<b>喇</b>'}
+];
+const PROMPTS=[
+{t:'P1 · 弱项诊断',tag:'诊断',p:'你是粤语语音教练，专门帮助普通话母语的大学生从零学习粤语。请通过对话了解我的粤语水平（目前零基础）和普通话发音习惯，先问我 3 个问题，然后出 5 道听辨选择题（aa/a 长短、-n/-ng、声调辨析）和 3 道跟读题，最后总结我最需要优先改善的 2-3 个弱项并解释原因。请用简体中文说明、粤语内容附粤拼。现在开始和我对话。',why:'对应课程「目标设定与弱项诊断」：让 AI 当教练而非百科全书。'},
+{t:'P2 · 生成三周计划',tag:'计划',p:'我选择的方法是「粤拼系统 + 高频词汇 + 情景对话」。请帮我制定一个三星期的学习计划，内容包括：每星期的学习步骤、具体练习任务、建议的时间安排（每周约 2 小时），以及每个星期我可以怎样检查自己是否有进步。我的背景：普通话母语、计算机专业大一、粤语零基础、目标是日常对话和求职面试场景。',why:'与课程 Module 1 的提示词范例同构，输出直接可用。'},
+{t:'P3 · 每日陪练（角色扮演）',tag:'练习',p:'你现在是香港茶餐厅的伙计，我是顾客。请用地道粤语口语（每句附粤拼和普通话释义）和我完成点餐对话 8 轮。我表达有误时不要打断，对话结束后统一纠正，每次最多指出 3 个错误，语气要鼓励。',why:'场景化陪练 + 延迟纠错，避免打击开口信心（鼓励性）。'},
+{t:'P4 · 周测评估（量化）',tag:'评估',p:'请用三个具体指标评估我本周的粤语学习：①声调准确率 ②词汇认读正确率 ③对话流利度。每个指标给出 1-5 分的评分标准，根据我下面提供的练习记录打分，并给出不超过 3 条下周改进建议。\n我的本周记录：〔粘贴你的练习记录/录音文本〕',why:'对应课程「AI 辅助评估」的量化评估提示词。'},
+{t:'P5 · 录音对比（成果证据）',tag:'证据',p:'这是我 Week1 的基线录音文本和 Week3 的汇报录音文本（同样 10 个基准句）：\n〔Week1 文本〕\n〔Week3 文本〕\n请逐句对比，指出：①进步最明显的 3 处 ②仍需改善的 2 处 ③估计总体进步百分比并说明理由。',why:'直接产出「明确进步证据」，可截图放简报。'},
+{t:'P6 · 工具五维评估',tag:'日志',p:'请从准确性、鼓励性、可行性、实用性、个性化学习适配度五个维度，评估〔工具名，如：豆包语音对话〕用于粤语学习的表现。每个维度 1-5 分并举例说明，最后用一句话总结它最适合的使用场景。',why:'课程指定的评估维度，结果填进学习日志与「进度」页雷达图。'},
+{t:'P7 · 面试模拟',tag:'场景',p:'你是香港科技公司的技术面试官，面试职位是「暑期实习生（软件开发）」。请用粤语口语向我提 5 个问题（每个问题附粤拼和普通话释义），我逐个用粤语回答。全部问完后，从发音清晰度、用词专业度、回答结构、语气得体四个维度给我诊断报告和改进示范。',why:'对应 Module 3 求职招聘场景，粤英混用更真实。'},
+{t:'P8 · 汇报讲稿打磨',tag:'汇报',p:'我要在课程中做一个 10 分钟小组口头报告，主题是「如何用 AI 工具从零学习粤语」。请帮我把下面这段学习历程改成粤语口语版讲稿（我讲约 3 分钟），关键词附粤拼，并把「目标设定→弱项诊断→AI 工具选择→学习方案→成果展示→人机反思」六个环节标注出来：\n〔粘贴你的学习历程概述〕',why:'用粤语汇报学粤语——汇报内容与学习内容闭环。'}
+];
+const PLAN=[
+{w:'第 1 周 · 发音筑基 —— 先学拼，再学讲',goal:'见拼能读；六调跟读基本到位；完成基线录音。',days:[
+{t:'Day 1 · 粤拼总览 + 声母①',d:'粤拼三件套（声母+韵母+声调）通读；19 声母表过一遍；ng 专题：我 ngo5 / 牙 ngaa4 / 牛 ngau4 / 硬 ngaang6 各 10 遍。'},
+{t:'Day 2 · 声母② + 九个韵腹',d:'z/c/s 平舌（渣叉沙）；oe/eo/yu 三个新韵腹（靴 hoe1 / 春 ceon1 / 书 syu1）各跟读 10 遍。'},
+{t:'Day 3 · aa/a 对立 + 韵母矩阵',d:'三/心、衫/深、八/不、买/米、山/新 听辨跟读；「发音系统」页韵母矩阵按行朗读一遍。'},
+{t:'Day 4 · 鼻音尾 + 六声调',d:'新 san1 / 生 saang1 / 心 sam1 三分练习；si1→si6 跟读并录音回放，用手势比调值。'},
+{t:'Day 5 · 入声专题',d:'-p/-t/-k 各 5 字 ×10 遍（十湿叶贴 / 一七八发 / 六白识学）；「三九四零五二七八六」连读 10 遍。'},
+{t:'Day 6 · 问候词 + 自由拼读',d:'词汇库「问候·礼貌」跟读两轮；随机点开 10 个音节卡片拼读自查。'},
+{t:'Day 7 · 周测 + 基线录音 ⭐',d:'① 发音小测 20 题，目标 ≥16；②「进度·录音」页录基线 10 句（对着文本朗读），下载存档 baseline-week1。'}]},
+{w:'第 2 周 · 词汇与开口 —— 日常场景能应付',goal:'日常高频 100 词认读 ≥80%；完成 3 个情景对话；录音 v2。',days:[
+{t:'Day 8 · 问候句式',d:'词汇库「问候·礼貌」自测模式过两轮；句式：你系唔系学生？造 5 句。'},
+{t:'Day 9 · 数字金钱',d:'1-99 数数 2 遍；几多钱 / 埋单 / 八达通 情景造句 5 句。'},
+{t:'Day 10 · 饮食 + 对话①',d:'「茶餐厅·饮食」18 词跟读；情景对话「茶餐厅」遮住释义听 2 遍、跟读 2 遍。'},
+{t:'Day 11 · 出行 + 对话②',d:'「出行问路」14 词；情景对话「问路」脱稿演练，用 P3 提示词让 AI 扮演路人对话 8 轮。'},
+{t:'Day 12 · 校园 + 对话③',d:'「校园学习」15 词；情景对话「校园」+ 用 AI 扮演同学互问互答。'},
+{t:'Day 13 · 动词 + 语法点',d:'「日常高频」动词（睇听讲食饮瞓企行走）造句；语法卡：咗 / 紧 / 啲 各造 3 句。'},
+{t:'Day 14 · 周测 + 录音 v2 ⭐',d:'① 词汇自测 50 词目标 ≥40（自测模式翻卡记录）；②「茶餐厅点餐」脱稿录音 v2，存档 speaking-week2；③ 用 P4 提示词让 AI 评估并记录。'}]},
+{w:'第 3 周 · 专业与汇报 —— 学以致用，直接闭环',goal:'专业词汇 + 粤语面试 + 用粤语讲学习历程（= 报告内容）。',days:[
+{t:'Day 15 · 专业词①',d:'「计算机专业」硬件/日常词跟读；总结港式粤英混用规律（写 code、落 bug、做 project）。'},
+{t:'Day 16 · 专业词②',d:'数据/算法/伺服器/人工智能等专业词；造句：「我嘅专业系计算机科学与技术」等 5 句。'},
+{t:'Day 17 · 面试词 + 自我介绍',d:'「求职面试」18 词；写 1 分钟粤语自我介绍稿，AI 润色后逐句跟读 10 遍。'},
+{t:'Day 18 · 面试问答演练',d:'用 P7 提示词让 AI 扮演面试官 5 题，语音回答；记录卡壳的地方。'},
+{t:'Day 19 · 汇报五段式粤语化',d:'把报告五项核心内容（目标/诊断/工具/方案/成果）逐段转成粤语关键词 8-10 个 + 首句，用 P8 打磨。'},
+{t:'Day 20 · 汇报排练',d:'3 分钟脱稿演练录音，回放标记 ≥5 处声调错误并逐个纠正。'},
+{t:'Day 21 · 终测 ⭐',d:'① 3 分钟粤语汇报录音 v3（report-week3）；② 复录基线 10 句；③ 用 P5 提示词出三版对比评估，雷达图+录音全部归档 → 放进简报「成果展示」。'}]}
+];
+const LOG_TPL=[
+{t:'Module 1 · AI 素养与提示词入门',tpl:'本单元我了解了 AI 素养框架和好指令五要素（指定角色、明确任务、格式限制、上下文、语言要求）。\n【我做了什么】与 AI 对话设计了粤语学习的第一版提示词（V1：教我粤语 → V3：角色+对话式训练+限制纠错数量），记录在迭代记录表。\n【AI 工具五维评估】准确性 4/5：粤拼标注基本正确，个别多音字有误；鼓励性 5/5：反馈总是先肯定再纠错；可行性 4/5：建议任务量适合每天 20 分钟；实用性 4/5：……；个性化适配 5/5：能根据我是普通话母语调整重点（入声、aa/a）。\n【下一步】用迭代后的提示词生成三周计划并开始执行。'},
+{t:'Module 2 · 确立学习目标与弱项诊断',tpl:'本单元我用 AI 诊断了自己的粤语弱项。\n【诊断过程】用 P1 提示词让 AI 出了 5 道听辨题+3 道跟读题，结果：①入声 -p/-t/-k 完全不会（普通话没有）；②aa/a 长短听辨错误率 40%；③六声调中 4/5/6 调混淆。\n【确立目标】G1 掌握粤拼；G2 150 高频词；G3 情景对话脱稿。\n【工具对比】豆包语音（口语陪练自然）vs DeepSeek（文字解释清楚、免费）——截图见附件。\n【评估】准确性 4；鼓励性 5；可行性 4；实用性 4；适配度 4。计划第 1 周主攻发音。'},
+{t:'Module 3 · 求职与招聘（面试实践）',tpl:'本单元进行了粤语求职面试角色扮演。\n【准备】用 AI 生成招聘启事（软件开发实习生）+ 3 条面试问题；写了 1 分钟粤语自我介绍。\n【实践】课堂上面试/被面试各一轮。我的问题：声调 4/6 混淆、应急时退回普通话。\n【AI 的帮助与局限】帮助：面试问题预测准、自我介绍润色地道（用「见工」「人工」等港式词）；局限：无法直接听我的发音（语音对话工具能听但打分偏松）。\n【改进】第 3 周继续用 P7 提示词每天练 5 题；把高频面试词做成自测卡。'},
+{t:'Module 4 · 投诉与回应（沟通实践）',tpl:'本单元写了粤语投诉信并做口头投诉/客服角色扮演。\n【过程】用「事—证—影—求—结」框架写投诉信（网购笔记本电脑两天损坏）；与同学配对口头互演。\n【语言挑战】投诉需要语气坚定，粤语低降调（4 声）让语句听起来更严肃，我一开始掌握不好；「退货 / 跟进 / 保修」等词反复练。\n【AI 工具评估】准确性 4：生成的投诉信格式完整；鼓励性 3：偏纠正，语气生硬；可行性 5：模板可直接套用；实用性 5；适配度 3：没有针对我发音的反馈。\n【收获】学会了正式粤语表达的结构（先事实后诉求）。'},
+{t:'Module 5 · 自主学习实践（三周计划执行）',tpl:'三周计划执行总结。\n【完成度】计划任务完成 XX%；基线→v2→v3 三版录音齐全。\n【量化进步】AI 对比评估：声调准确率从 XX% 提升到 XX%；3 分钟汇报能脱稿完成；词汇认读 XX/150。\n【最有用的方法】①最小对立对听辨（三/心）②录音回放自查 ③AI 角色扮演对话。\n【AI 的局限】不能准确评估语音细节（我把录音转文字后它才能对比）；偶尔粤拼标错（用粤音字典网站交叉验证）。\n【反思】前期太依赖「看」，第 2 周起强制「先开口再对照」，进步明显加快。下一步：把粤语用于社团活动和实习面试。'}
+];
+const BASELINE=[
+'你好，我叫阿明，我系计算机科学与技术专业嘅一年级学生。',
+'唔该晒，多谢你帮我。',
+'食咗饭未？',
+'我唔系好识讲广东话，但我好想学。',
+'呢个几多钱？',
+'唔该，请问地铁站喺边度？',
+'今日天气好好，我哋出街啦。',
+'听日我要交功课，今晚要温书。',
+'一二三四五六七八九十，三九四零五二七八六。',
+'我用一个三星期计划学粤语，而家可以同你讲三分钟。'];
+const QUIZ_BANK=[
+{q:'听辨：点击播放，读的是哪个字？',play:'三',opts:['三 saam1','心 sam1'],a:0,k:'aa 长音 vs a 短音'},
+{q:'听辨：点击播放，读的是哪个字？',play:'心',opts:['三 saam1','心 sam1'],a:1,k:'aa 长音 vs a 短音'},
+{q:'听辨：点击播放，读的是哪个字？',play:'八',opts:['八 baat3','不 bat1'],a:0,k:'aat vs at'},
+{q:'听辨：点击播放，读的是哪个字？',play:'新',opts:['新 san1','生 saang1'],a:0,k:'-n 尾 vs -ng 尾'},
+{q:'听辨：点击播放，读的是哪个字？',play:'生',opts:['新 san1','生 saang1'],a:1,k:'-n 尾 vs -ng 尾'},
+{q:'「诗 si1」是第几声？',opts:['1 声 55 高平','4 声 21 低降'],a:0,k:'高平调'},
+{q:'「时 si4」是第几声？',opts:['2 声 35','4 声 21'],a:1,k:'低降调'},
+{q:'「市 si5」的调值是？',opts:['13 低升','35 高升'],a:0,k:'低升'},
+{q:'「试 si3」的调值是？',opts:['33 中平','55 高平'],a:0,k:'中平'},
+{q:'「是 si6」的调值是？',opts:['22 低平','33 中平'],a:0,k:'低平'},
+{q:'入声字「十 sap6」的韵尾是？',opts:['-p 闭唇','-k 锁喉'],a:0,k:'入声韵尾'},
+{q:'入声字「一 jat1」的韵尾是？',opts:['-t 舌尖抵齿','-p 闭唇'],a:0,k:'入声韵尾'},
+{q:'入声字「六 luk6」的韵尾是？',opts:['-k 锁喉','-t 舌尖抵齿'],a:0,k:'入声韵尾'},
+{q:'「我」的粤拼是？',opts:['ngo5（有 ng 声母）','o5（零声母）'],a:0,k:'ng 声母'},
+{q:'「你」的粤拼是？',opts:['nei5','lei5'],a:0,k:'n/l 之分'},
+{q:'「广东」的正确读法？',opts:['gwong2 dung1（gw 圆唇）','gong2 dung1'],a:0,k:'gw 声母'},
+{q:'「街」的韵母是？',opts:['gaai1（aai 长音）','gai1（ai 短音）'],a:0,k:'aa/a 对立'},
+{q:'「深 sam1」和「心 sam1」是什么关系？',opts:['同音','不同音'],a:0,k:'同音字'},
+{q:'「买 maai5」和「米 mai5」靠什么区分？',opts:['韵母长短 aa/a','声母不同'],a:0,k:'aa/a 对立'},
+{q:'哪个字是入声（急促收尾）？',opts:['学 hok6','好 hou2'],a:0,k:'入声识别'},
+{q:'「听日」的意思是？',opts:['明天','昨天'],a:0,k:'词汇'},
+{q:'「唔该」用在什么场景？',opts:['麻烦别人/请托时','收到礼物时'],a:0,k:'词汇：唔该 vs 多谢'},
+{q:'「畀杯水我」的语序特点？',opts:['宾语（人）后置','宾语（物）后置'],a:0,k:'双宾语语序'},
+{q:'「你行先」的「先」放在？',opts:['句末','动词前'],a:0,k:'修饰语后置'},
+{q:'粤拼一共用几个数字标调？',opts:['6 个','4 个'],a:0,k:'声调系统'},
+{q:'九声中三个入声的调号对应？',opts:['1 / 3 / 6','2 / 4 / 6'],a:0,k:'入声调号'}
+];
+/* ============ 工具 ============ */
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const LS={get:(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
+let toastTimer;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
+function go(p){$$('.tab').forEach(b=>b.classList.toggle('on',b.dataset.p===p));$$('.page').forEach(s=>s.classList.toggle('on',s.id==='p-'+p));window.scrollTo({top:0,behavior:'smooth'})}
+$$('.tab').forEach(b=>b.onclick=()=>go(b.dataset.p));
+
+/* ============ TTS ============ */
+let voices=[],hkVoice=null;
+function pickVoice(){
+  voices=speechSynthesis.getVoices();
+  const hks=voices.filter(v=>/zh[-_]HK|yue|Cantonese|粵|粤/i.test(v.lang+' '+v.name));
+  hkVoice=hks.find(v=>/google/i.test(v.name))||hks[0]||null;
+  const st=$('#ttsStatus');
+  if(hkVoice){st.innerHTML='　✅ 已找到粤语语音：<b>'+hkVoice.name+'</b>'}
+  else{st.innerHTML='　⚠️ 未检测到粤语语音（zh-HK）。macOS：系统设置→辅助功能→朗读内容→系统声音→管理声音→添加「中文（粤语）」；Windows：设置→时间和语言→语音→添加粤语语音包；或改用 Chrome / Edge。其余功能不受影响。'}
+}
+if('speechSynthesis' in window){speechSynthesis.onvoiceschanged=pickVoice;setTimeout(pickVoice,300)}
+function speak(text,rate){
+  if(!('speechSynthesis' in window)){toast('此浏览器不支持语音合成');return}
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang='zh-HK';if(hkVoice)u.voice=hkVoice;u.rate=rate||0.85;
+    speechSynthesis.speak(u);
+  }catch(e){toast('语音播放失败')}
+}
+
+/* ============ 发音系统 ============ */
+const D_TAG=['🟢','🟡','🔴'],D_CLS=['t-ok','t-mid','t-hot'];
+function renderInitials(){
+  $('#initialsGrid').innerHTML=INITIALS.map(x=>
+  `<div class="card initial-card" onclick="speak('${x.ex.split(' ')[0]}')" title="点击朗读">
+    <span class="tag ${D_CLS[x.d]} diff">${D_TAG[x.d]}</span>
+    <div class="big">${x.jp}</div><div class="tip">${x.ipa}</div>
+    <div class="ex">${x.ex}<br><span class="tip">${x.note}</span></div>
+  </div>`).join('')
+}
+function renderFinals(){
+  let h='<table class="tbl"><tr><th>韵腹＼韵尾</th>'+FINALS_TAILS.map(t=>`<th>${t}</th>`).join('')+'</tr>';
+  FINALS_ROWS.forEach(r=>{
+    h+=`<tr><td class="hd">${r.n}${r.hot?`<br><span class="tag ${D_CLS[r.hot]}">${D_TAG[r.hot]}</span>`:''}<br><span class="tip">${r.hint}</span></td>`;
+    r.cells.forEach(c=>{h+=c?`<td class="has" onclick="speak('${c[0]}')" title="点击朗读"><b>${c[0]}</b><br><span class="jp">${c[1]}</span></td>`:'<td style="opacity:.25">·</td>'});
+    h+='</tr>'
+  });
+  h+='</table>';$('#finalsTable').innerHTML=h;
+}
+function renderTones(){
+  $('#tonesGrid').innerHTML=TONES.map(t=>
+  `<div class="card toneCard" style="border-top:4px solid ${t.c}" onclick="speak('${t.ch}')" title="点击朗读">
+    <div class="no" style="color:${t.c}">${t.n} 调 · ${t.name}</div>
+    <div class="ch">${t.ch}</div><div class="jp">${t.jp} · ${t.cv}</div>
+    <div class="tip" style="margin-top:6px">${t.like}</div><div style="margin-top:6px">🔊</div>
+  </div>`).join('')
+}
+function renderTsap(){
+  ['p','t','k'].forEach(k=>{
+    $('#tsap'+k.toUpperCase()).innerHTML=TSAP[k].map(x=>`<span class="chip" style="margin:2px" onclick="speak('${x[0]}')">${x[0]} <span class="jp">${x[1]}</span> 🔊</span>`).join('')
+  })
+}
+function renderBaseline(){
+  $('#baselineBox').innerHTML=BASELINE.map((s,i)=>
+  `<div style="display:flex;gap:8px;margin:4px 0;align-items:flex-start"><button class="ph" onclick="speak(BASELINE[${i}])">${i+1}</button><span style="font-size:13.5px">${s}</span></div>`).join('')
+}
+function playBaseline(){
+  (function seq(i){if(i>=BASELINE.length)return;speak(BASELINE[i]);setTimeout(()=>seq(i+1),Math.max(2800,BASELINE[i].length*340))})(0)
+}
+
+/* ============ 发音小测 ============ */
+let quizScore=LS.get('ygt_quiz',null);
+function startQuiz(n){
+  const bank=[...QUIZ_BANK].sort(()=>Math.random()-.5).slice(0,n);
+  let idx=0,ok=0;
+  const area=$('#quizArea');
+  function render(){
+    if(idx>=bank.length){
+      quizScore=Math.round(ok/n*100);LS.set('ygt_quiz',quizScore);
+      area.innerHTML=`<div style="text-align:center;padding:20px"><b style="font-size:24px;color:${quizScore>=80?'var(--ok)':'var(--warn)'}">得分：${ok} / ${n}（${quizScore}%）</b><p class="tip" style="margin-top:8px">${quizScore>=80?'✅ 达标（≥80%），可以进入下一周':'💪 未达 80%，把错题考点在「发音系统」页再练一遍，明天重测'}<br>成绩已记录到「进度」页。</p></div>`;
+      $('#quizScore').textContent=`最近成绩：${quizScore}%`;renderProgress();return
+    }
+    const q=bank[idx];
+    area.innerHTML=`<div class="quizQ"><span class="qjp">第 ${idx+1} / ${n} 题</span> · ${q.q}${q.play?` <button class="btn btn-o" style="padding:4px 12px;font-size:13px" onclick="speak('${q.play}')">🔊 播放</button>`:''}</div>`+
+      q.opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')+
+      `<p class="tip" style="margin-top:6px">考点：${q.k}</p>`;
+    area.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      const i=+b.dataset.i,correct=i===q.a;
+      area.querySelectorAll('.opt').forEach((x,j)=>{if(j===q.a)x.classList.add('right');if(j===i&&!correct)x.classList.add('wrong')});
+      if(correct)ok++;idx++;setTimeout(render,900)
+    });
+  }
+  render();
+}
+
+/* ============ 三周计划 ============ */
+let planChecks=LS.get('ygt_tasks',{}),curWeek=0;
+$$('.weekTabs .chip').forEach(c=>c.onclick=()=>{curWeek=+c.dataset.w;$$('.weekTabs .chip').forEach(x=>x.classList.toggle('on',x===c));renderWeek()});
+function renderWeek(){
+  const w=PLAN[curWeek];
+  $('#weekBox').innerHTML=`<div class="card" style="margin-bottom:14px"><b>🎯 本周目标</b><p class="tip">${w.goal}</p></div>`+
+    w.days.map((d,i)=>{
+      const id='w'+curWeek+'d'+i,ck=!!planChecks[id];
+      return `<div class="dayCard ${ck?'done':''}"><input type="checkbox" ${ck?'checked':''} onchange="toggleTask('${id}',this)"><div><div class="dt">${d.t}</div><div class="dd">${d.d}</div></div></div>`
+    }).join('');
+  renderPlanBar();
+}
+function toggleTask(id,el){
+  planChecks[id]=el.checked;LS.set('ygt_tasks',planChecks);
+  el.closest('.dayCard').classList.toggle('done',el.checked);
+  renderPlanBar();renderProgress();
+}
+function totalTasks(){return PLAN.reduce((s,w)=>s+w.days.length,0)}
+function renderPlanBar(){
+  const done=Object.values(planChecks).filter(Boolean).length,pct=Math.round(done/totalTasks()*100);
+  $('#planBar').style.width=pct+'%';$('#planPct').textContent=pct+'%';
+}
+
+/* ============ 词汇库 ============ */
+let vocabCat='all',selfTest=false,vocabWrong=LS.get('ygt_vocabWrong',[]);
+const vocabTotal=Object.values(VOCAB).reduce((s,c)=>s+c.items.length,0);
+function renderVocabChips(){
+  const cats=[['all','全部 '+vocabTotal],...Object.entries(VOCAB).map(([k,v])=>[k,v.name+' '+v.items.length])];
+  $('#vocabChips').innerHTML=cats.map(([k,n])=>`<button class="chip ${vocabCat===k?'on':''}" onclick="setVocabCat('${k}')">${n}</button>`).join('')
+}
+function setVocabCat(k){vocabCat=k;renderVocabChips();renderVocab()}
+function toggleSelfTest(){selfTest=!selfTest;$('#selfTestBtn').textContent='🎭 自测模式：'+(selfTest?'开':'关');$('#selfTestBtn').classList.toggle('on',selfTest);renderVocab()}
+function renderVocab(){
+  const q=($('#vocabSearch').value||'').trim().toLowerCase();
+  let items=[];
+  Object.entries(VOCAB).forEach(([k,v])=>{if(vocabCat==='all'||vocabCat===k)v.items.forEach(it=>items.push(it))});
+  if(q)items=items.filter(it=>(it.w+it.m+it.s).toLowerCase().indexOf(q)>=0);
+  $('#vocabGrid').innerHTML=items.map(it=>{
+    const wrong=vocabWrong.indexOf(it.w)>=0;
+    return `<div class="card vocab-card ${selfTest?'flip':''}" data-w="${it.w}" onclick="onVocabCard(this)" title="点击朗读 / 自测翻转">
+      <div class="w">${it.w} ${wrong?'<span class="tag t-hot">常错</span>':''}</div>
+      <div class="jp">${it.jp}</div>
+      <div class="m">${it.m}</div>
+      <div class="s">${it.s}</div>
+      ${selfTest?'<div class="tip" style="margin-top:8px;color:var(--accent)">👆 点击翻转换答案</div>':''}
+    </div>`
+  }).join('');
+  $('#vocabCount').textContent=`共 ${items.length} 个词${vocabWrong.length?` · 已标记常错 ${vocabWrong.length} 个（复习优先）`:''}`;
+}
+function onVocabCard(el){
+  if(selfTest){
+    el.classList.toggle('flip');
+    const w=el.dataset.w;
+    if(!el.classList.contains('flip')&&!vocabWrong.includes(w)){/* noop */}
+    return;
+  }
+  speak(el.dataset.w);
+}
+function markWrong(w){
+  if(!vocabWrong.includes(w)){vocabWrong.push(w);LS.set('ygt_vocabWrong',vocabWrong)}
+  toast('已标记「'+w+'」为常错词');
+  renderVocab();
+}
+
+/* ============ 情景对话 ============ */
+let curConv=0;
+function renderConvChips(){
+  $('#convChips').innerHTML=CONVS.map((c,i)=>`<button class="chip ${curConv===i?'on':''}" onclick="setConv(${i})">${c.name}</button>`).join('')
+}
+function setConv(i){curConv=i;renderConvChips();renderConv()}
+function renderConv(){
+  const c=CONVS[curConv];
+  $('#convTitle').textContent=c.name+'（'+c.rows.length+' 轮）';
+  $('#convBox').innerHTML=c.rows.map((r,i)=>
+    `<div class="bubble ${r.who==='你'?'b-R':'b-L'}" onclick="speak('${r.w.replace(/'/g,"\\'")}')">
+      <div class="who">${r.who}</div>
+      <div>${r.w}</div>
+      <span class="bjp">${r.jp}</span>
+      <span class="bm">${r.m}</span>
+    </div>`).join('');
+}
+function playAll(){
+  const rows=CONVS[curConv].rows;
+  (function seq(i){
+    if(i>=rows.length)return;
+    speak(rows[i].w);
+    setTimeout(()=>seq(i+1),Math.max(3000,rows[i].w.length*420));
+  })(0)
+}
+function renderGrammar(){
+  $('#grammarGrid').innerHTML=GRAMMAR.map(g=>
+    `<div class="card"><h3 style="color:var(--accent)">${g.t}</h3>
+     <p class="tip">${g.c}</p>
+     <p style="margin-top:6px;font-size:14.5px">${g.ex}</p></div>`).join('')
+}
+
+/* ============ 提示词库 ============ */
+function renderPrompts(){
+  $('#promptGrid').innerHTML=PROMPTS.map((p,i)=>
+    `<div class="card promptCard">
+      <h3>${p.t} <span class="tag t-info">${p.tag}</span></h3>
+      <p class="tip">${p.why}</p>
+      <pre id="pre${i}">${p.p}</pre>
+      <button class="btn btn-o copyBtn" onclick="copyPrompt(${i})">📋 复制</button>
+    </div>`).join('')
+}
+function copyPrompt(i){
+  const txt=PROMPTS[i].p;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>toast('已复制 P'+(i+1)+'，去粘贴给 AI 吧'),()=>fallbackCopy(txt));
+  }else fallbackCopy(txt);
+}
+function fallbackCopy(txt){
+  const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);
+  ta.select();try{document.execCommand('copy');toast('已复制')}catch(e){toast('复制失败，请手动选择文本')}
+  document.body.removeChild(ta);
+}
+
+/* ============ 学习日志 ============ */
+let logs=LS.get('ygt_logs',{});
+function renderLogs(){
+  $('#logGrid').innerHTML=LOG_TPL.map((l,i)=>
+    `<div class="card logbox">
+      <div class="row" style="margin-bottom:10px"><b>${l.t}</b><span class="sp"></span>
+        <button class="btn btn-s" style="padding:5px 12px;font-size:12.5px" onclick="fillTpl(${i})">📝 填入模板</button></div>
+      <textarea id="log${i}" placeholder="记录这个模块你用 AI 学粤语的过程与反思…（自动保存）" oninput="saveLog(${i})">${(logs[i]||'').replace(/</g,'&lt;')}</textarea>
+      <p class="tip" style="margin-top:6px">已写 ${(logs[i]||'').length} 字</p>
+    </div>`).join('')
+}
+function fillTpl(i){$('#log'+i).value=LOG_TPL[i].tpl;saveLog(i);toast('已填入模板，记得按真实经历修改')}
+function saveLog(i){logs[i]=$('#log'+i).value;LS.set('ygt_logs',logs);renderProgress(true)}
+function exportLogs(){
+  let md='# LEI1101 学习日志（附录）\n\n';
+  let any=false;
+  LOG_TPL.forEach((l,i)=>{if(logs[i]&&logs[i].trim()){any=true;md+=`## ${l.t}\n\n${logs[i]}\n\n`}});
+  md+=any?'':'（还没有写任何日志，先去「学习日志」页填写吧）\n';
+  download('learning-journal.md',md);
+}
+function download(name,content,mime){
+  const blob=content instanceof Blob?content:new Blob([content],{type:mime||'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+}
+
+/* ============ 录音 ============ */
+let recStates=[null,null,null]; // {rec, chunks, url, blob}
+const REC_DEFS=[
+  {t:'Week 1 · 基线录音',d:'Day 7 · 朗读基线 10 句',hint:'baseline-week1'},
+  {t:'Week 2 · 情景对话录音',d:'Day 14 · 茶餐厅点餐脱稿',hint:'speaking-week2'},
+  {t:'Week 3 · 汇报录音',d:'Day 21 · 3 分钟学习历程汇报',hint:'report-week3'}
+];
+function renderRec(){
+  $('#recGrid').innerHTML=REC_DEFS.map((r,i)=>{
+    const st=recStates[i];
+    return `<div class="card recSlot">
+      <b>${r.t}</b>
+      <p class="tip">${r.d} · 建议文件名 ${r.hint}</p>
+      <button class="recBtn" id="recBtn${i}" onclick="toggleRec(${i})" title="录音/停止">🎙</button>
+      <div id="recArea${i}">${st&&st.url?`<audio controls src="${st.url}"></audio><div class="row" style="justify-content:center;margin-top:8px"><button class="btn btn-s" style="padding:5px 12px;font-size:12.5px" onclick="downloadRec(${i})">⬇ 下载</button></div>`:'<p class="tip">点麦克风开始录音</p>'}</div>
+    </div>`
+  }).join('');
+  renderProgress();
+}
+async function toggleRec(i){
+  const st=recStates[i];
+  if(st&&st.rec&&st.rec.state==='recording'){st.rec.stop();return}
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    const rec=new MediaRecorder(stream);
+    const chunks=[];
+    rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+    rec.onstop=()=>{
+      stream.getTracks().forEach(t=>t.stop());
+      const blob=new Blob(chunks,{type:rec.mimeType||'audio/webm'});
+      if(recStates[i]&&recStates[i].url)URL.revokeObjectURL(recStates[i].url);
+      recStates[i]={rec:null,url:URL.createObjectURL(blob),blob};
+      renderRec();toast('录音完成，可回放与下载');
+    };
+    recStates[i]={rec,chunks,url:null,blob:null};
+    rec.start();
+    $('#recBtn'+i).classList.add('rec');
+    toast('录音中…再点一次停止');
+    renderProgress(true);
+  }catch(e){toast('无法访问麦克风：'+(e.message||'请检查浏览器权限'))}
+}
+function downloadRec(i){
+  const st=recStates[i];if(!st||!st.blob)return;
+  download(REC_DEFS[i].hint+(st.blob.type.indexOf('mp4')>=0?'.m4a':'.webm'),st.blob);
+}
+
+/* ============ 五维评估 ============ */
+const EVAL_DIMS=['准确性','鼓励性','可行性','实用性','个性化适配'];
+let evals=LS.get('ygt_evals',[]);
+function addEval(){
+  const name=($('#evalTool').value||'').trim();
+  if(!name){toast('请先填写工具名');return}
+  evals.push({name,scores:[3,3,3,3,3]});
+  $('#evalTool').value='';
+  LS.set('ygt_evals',evals);renderEvals();
+}
+function setEval(ei,di,v){
+  evals[ei].scores[di]=+v;LS.set('ygt_evals',evals);renderEvals();
+}
+function delEval(ei){
+  evals.splice(ei,1);LS.set('ygt_evals',evals);renderEvals();
+}
+function renderEvals(){
+  if(!evals.length){$('#evalList').innerHTML='<p class="tip">还没有记录。用「AI提示词」页的 P6 让 AI 帮你评估，把分数记在这里。</p>';drawRadar();return}
+  $('#evalList').innerHTML=evals.map((e,ei)=>
+    `<div class="card" style="padding:14px;margin-bottom:10px">
+      <div class="row" style="margin-bottom:6px"><b>${e.name}</b><span class="sp"></span>
+        <button class="btn btn-s" style="padding:3px 10px;font-size:12px" onclick="delEval(${ei})">删除</button></div>
+      ${EVAL_DIMS.map((d,di)=>`<div class="evalRow"><span style="font-size:13.5px">${d}</span>
+        <input type="range" min="1" max="5" step="1" value="${e.scores[di]}" oninput="setEval(${ei},${di},this.value)">
+        <span class="val">${e.scores[di]}</span></div>`).join('')}
+      <p class="tip" style="margin-top:8px">总分 ${e.scores.reduce((a,b)=>a+b,0)} / 25</p>
+    </div>`).join('');
+  drawRadar();
+}
+const R_COLORS=['#7c3aed','#db2777','#0891b2','#f97316','#059669'];
+function drawRadar(){
+  const svg=$('#radarSvg');if(!svg)return;
+  const cx=135,cy=125,R=85,n=5;
+  let g='';
+  for(let ring=1;ring<=5;ring++){
+    const pts=EVAL_DIMS.map((_,i)=>{
+      const a=-Math.PI/2+i*2*Math.PI/n,r=R*ring/5;
+      return (cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1);
+    }).join(' ');
+    g+=`<polygon points="${pts}" fill="none" stroke="#eee7db" stroke-width="1"/>`;
+  }
+  EVAL_DIMS.forEach((d,i)=>{
+    const a=-Math.PI/2+i*2*Math.PI/n;
+    const x=cx+(R+16)*Math.cos(a),y=cy+(R+16)*Math.sin(a);
+    g+=`<line x1="${cx}" y1="${cy}" x2="${cx+R*Math.cos(a)}" y2="${cy+R*Math.sin(a)}" stroke="#eee7db"/>
+        <text x="${x}" y="${y+4}" font-size="11" text-anchor="middle" fill="#5b6472">${d}</text>`;
+  });
+  evals.slice(0,5).forEach((e,ei)=>{
+    const pts=e.scores.map((s,i)=>{
+      const a=-Math.PI/2+i*2*Math.PI/n,r=R*s/5;
+      return (cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1);
+    }).join(' ');
+    g+=`<polygon points="${pts}" fill="${R_COLORS[ei]}22" stroke="${R_COLORS[ei]}" stroke-width="2"/>
+        <text x="10" y="${16+ei*16}" font-size="11" fill="${R_COLORS[ei]}">■ ${e.name}</text>`;
+  });
+  if(!evals.length)g+=`<text x="${cx}" y="${cy+4}" font-size="12" text-anchor="middle" fill="#a09a8d">暂无数据</text>`;
+  svg.innerHTML=g;
+}
+
+/* ============ 进度总览 ============ */
+function renderProgress(skipRec){
+  const done=Object.values(planChecks).filter(Boolean).length;
+  const pct=Math.round(done/totalTasks()*100);
+  $('#ovPlan').textContent=pct+'%';
+  const logCount=LOG_TPL.filter((_,i)=>logs[i]&&logs[i].trim().length>10).length;
+  $('#ovLog').textContent=logCount+'/5';
+  const recCount=recStates.filter(s=>s&&s.blob).length;
+  $('#ovRec').textContent=recCount+'/3';
+  $('#ovQuiz').textContent=quizScore!=null?quizScore+'%':'—';
+  if(!skipRec&&$('#ovPlan')){/* rendered */}
+}
+
+/* ============ 初始化 ============ */
+function init(){
+  $('#statVocab').textContent=vocabTotal;
+  renderInitials();renderFinals();renderTones();renderTsap();renderBaseline();
+  if(quizScore!=null)$('#quizScore').textContent='最近成绩：'+quizScore+'%';
+  renderWeek();renderVocabChips();renderVocab();
+  renderConvChips();renderConv();renderGrammar();
+  renderPrompts();renderLogs();renderRec();renderEvals();renderProgress();
+}
+init();
+</script>
+</body>
+</html>
